@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import FreindRequest from './FreindRequest'
+import SentRequest from './SentRequest'
 
 const FreindsMenu = ({ clickProp }) => {
     const [fbData, setFbData] = useState("");
@@ -19,9 +20,12 @@ const FreindsMenu = ({ clickProp }) => {
             });
     }, []);
     console.log(fbData)
-    const [req, setRequest] = useState(true)
+    const [req, setRequest] = useState(false)
+    const requestBox = () =>{
+        setRequest(!req)
+    }
     return (
-        <div className="pb-20">
+        <div className="pb-20 ">
 
             <div className="w-full p-5 space-y-5">
 
@@ -34,16 +38,27 @@ const FreindsMenu = ({ clickProp }) => {
                 </div>
                 <span className="px-5 py-0 w-full flex border-b-2 border-gray-300 h-px"></span>
             </div>
-            <div className="box p-5 space-y-5">
+            <div className="box p-5 space-y-5 overflow-y-scroll  scrollbar scrollbar-thumb-gray-300 scrollbar-track-gray-50 h-screen">
                 <h1 className="font-semibold text-black text-lg tracking-widest">Freind Request</h1>
-                <h1 className="text-btn-blue text-xs">View sent requests</h1>
+                <h1 className="text-btn-blue text-xs cursor-pointer" onClick={()=>{setRequest(true)}}>View sent requests</h1>
                 {fbData.length ?
+                    <>
+                        {fbData &&
+                            fbData.map((props, i) => (
+                                <FreindRequest username={fbData[i].user.name} userImg={fbData[i].user.profile_image.large} mutual={fbData[i].user.total_photos} />))}
+                    </> : <h1>No new requests</h1>} {fbData.length ?
+                    <>
+                        {fbData &&
+                            fbData.map((props, i) => (
+                                <FreindRequest username={fbData[i].user.name} userImg={fbData[i].user.profile_image.large} mutual={fbData[i].user.total_photos} />))}
+                    </> : <h1>No new requests</h1>} {fbData.length ?
                     <>
                         {fbData &&
                             fbData.map((props, i) => (
                                 <FreindRequest username={fbData[i].user.name} userImg={fbData[i].user.profile_image.large} mutual={fbData[i].user.total_photos} />))}
                     </> : <h1>No new requests</h1>}
             </div>
+            {req?<SentRequest status={requestBox}/>:null}
         </div>
     )
 }

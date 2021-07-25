@@ -10,7 +10,7 @@ const FreindsSidebar = () => {
        
     }
     return (
-        <div className="w-1/4 fixed left-0 top-12 overflow-y-scroll h-full bg-white">
+        <div className="w-1/4 fixed left-0 top-12   bg-white">
             {freinds? <FreindsSidebarMenu clickProp={freindsClicked} />:""}
             {freinds?"":<FreindsMenu clickProp={freindsClicked} />}
         </div>
