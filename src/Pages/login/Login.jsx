@@ -7,6 +7,8 @@ const Login = () => {
   //     console.log("data is written")
   // })
 
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let permission = "";
@@ -60,7 +62,7 @@ const Login = () => {
                   >
                     <button className="p-5">Log In</button>
                   </Link>
-                  <Link className="w-1/2 block mx-auto outline-none border border-gray-400 rounded-xl text-base text-white py-2.5 px-1 bg-btn-green">
+                  <Link to={"/"} className="w-1/2 block mx-auto outline-none border border-gray-400 rounded-xl text-base text-white py-2.5 px-1 bg-btn-green">
                     <button className="w-full" type="submit">
                       Create New Account
                     </button>

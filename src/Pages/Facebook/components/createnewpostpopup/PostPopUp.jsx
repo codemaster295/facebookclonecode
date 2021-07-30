@@ -60,7 +60,7 @@ const PostPopUp = ({ setModal }) => {
   
   return (
     <>
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/12 shadow-2xl rounded-xl bg-white  ">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/12 shadow-2xl rounded-xl bg-white z-50  ">
         <div className="box space-y-5 ">
           <span className="font-medium relative text-lg text-black text-center block border-b-2 border-gray-200 py-2">
             Create post

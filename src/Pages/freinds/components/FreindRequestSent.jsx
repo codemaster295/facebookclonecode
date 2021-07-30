@@ -2,10 +2,10 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 
-const FreindRequestSent = (props) => {
+const FriendRequestSent = (props) => {
     const [cancel ,setCancel] = useState(false)
     return (
-        <div className="FreindRequestSent flex justify-between p-2 mx-4 my-3 cursor-pointer hover:bg-gray-300 rounded-xl">
+        <div className="FriendRequestSent flex justify-between p-2 mx-4 my-3 cursor-pointer hover:bg-gray-300 rounded-xl">
             <div className="flex items-center space-x-5">
                 <span className="rounded-full overflow-hidden">
                 <img className="rounded-full w-14 h-14" src={props.userImg} alt="" />
@@ -13,7 +13,7 @@ const FreindRequestSent = (props) => {
                 <span>
                     <h1 className="text-base font-bold text-black tracking-widest">{props.username}</h1>
 
-                    <h1 className="text-xm text-gray-500 tracking-tight font-semibold">{cancel?"User Removed":"2 mutual freinds"}</h1>
+                    <h1 className="text-xm text-gray-500 tracking-tight font-semibold">{cancel?"User Removed":"2 mutual friends"}</h1>
                 </span>
             </div>
                 <div className="flex items-center justify-end">
@@ -23,4 +23,4 @@ const FreindRequestSent = (props) => {
     )
 }
 
-export default FreindRequestSent
+export default FriendRequestSent

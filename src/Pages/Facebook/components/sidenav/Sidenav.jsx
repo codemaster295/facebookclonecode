@@ -31,7 +31,7 @@ const Sidenav = () => {
             className="text-red-500 cursor-pointer transform scale-100 hover:scale-105 transition-all duration-100 ease"
           />
           <span className="text-sm text-gray-500 tracking-wider font-medium">
-            Find Freinds
+            Find Friends
           </span>
         </div>
         <div className="flex items-center pl-2 space-x-5 w-full  py-2.5 rounded-md transition-all duration-100 ease-linear transform scale-100 hover:scale-105 bg-none hover:bg-gray-300 cursor-pointer">

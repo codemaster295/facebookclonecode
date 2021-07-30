@@ -10,7 +10,7 @@ const Livepopup = ({ setLive }) => {
                     <Clear className="cursor-pointer" onClick={() => setLive(false)}/>
                 </span>
                 <span className="block p-2">
-                    <h1 className="text-gray-500 font-medium tracking-widest text-lg">Your account is too new to create a video . Try making some freind requests!</h1>
+                    <h1 className="text-gray-500 font-medium tracking-widest text-lg">Your account is too new to create a video . Try making some friend requests!</h1>
                 </span>
                 <span className="flex w-full items-center justify-items-end p-3">
                     <button className="bg-btn-blue outline-none text-sm text-white rounded-lg ml-auto px-5 py-1" onClick={() => setLive(false)}>OK</button>
