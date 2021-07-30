@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   AccountCircle,
   Clear,
@@ -10,6 +10,7 @@ import {
 import GroupIcon from "@material-ui/icons/Group";
 import Feelactivities from "../feelings/Feelactivities";
 import { storage } from "../../../firebase";
+import axios from "axios";
 
 const PostPopUp = ({ setModal }) => {
   const imageInput = useRef(null);
@@ -17,8 +18,24 @@ const PostPopUp = ({ setModal }) => {
   const [data, setData] = useState("")
   const [status, setStatus] = useState("")
   const [emojimodel, setEmojiModel] = useState(false)
-  const [url, setUrl] = useState("");
+  const [Url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
+  const [fbData ,setFbData]= useState([])
+  const userName = "MMO"
+  useEffect(() => {
+		axios
+			.get("http://localhost:5055")
+			.then((d) => {
+				setFbData(d.data);
+			})
+			.catch((Err) => {
+				console.log(Err);
+			});
+	}, []);
+
+	const submitForm = (e) => {
+		
+	};
  
   const handleChange = (event)=>{
    
@@ -29,6 +46,23 @@ const PostPopUp = ({ setModal }) => {
   }
   console.log(image)
   const handleUpload = () =>{
+    const newData = {
+			username: userName,
+			title: Url,
+			description: status,
+		};
+
+		console.log(newData);
+		setData(newData);
+
+		fetch("http://localhost:5055", {
+			method: "POST",
+			body: JSON.stringify(newData),
+			headers: { "Content-type": "application/json; charset=UTF-8" },
+		})
+			.then((response) => response.json(data))
+			.then((json) => console.log(json));
+		console.log(data);
     setModal(!(setModal))
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
@@ -48,8 +82,11 @@ const PostPopUp = ({ setModal }) => {
           .child(image.name)
           .getDownloadURL()
           .then(url => {
+            
             setUrl(url);
+            console.log(url)
           });
+          console.log(Url,"last url")
       }
     );
   };
@@ -57,6 +94,8 @@ const PostPopUp = ({ setModal }) => {
   const getImage = () => {
     imageInput.current.click();
   };
+
+
   
   return (
     <>
@@ -100,7 +139,7 @@ const PostPopUp = ({ setModal }) => {
               rows="8"
               placeholder="What is in your mind Mmo?"
             ></textarea>
-            <img src={url} alt="" />
+            {/* <img src={url} alt="" /> */}
           </div>
         </div>
         <div className="flex items-center w-full justify-around p-5">
