@@ -13,83 +13,118 @@ import { storage } from "../../../firebase";
 import axios from "axios";
 
 const PostPopUp = ({ setModal }) => {
+
+	// setTimeout(()=>{
+	//   if (uploadPost === true) {
+	// 		fetch("http://localhost:5055", {
+	// 			method: "POST",
+	// 			body: JSON.stringify(newData),
+	// 			headers: { "Content-type": "application/json; charset=UTF-8" },
+	// 		}).then((response) => response.json(newData) ,console.log("done"));
+	// 	}
+	//   else{
+	//     return
+
+	//   }
+	// },6000)
+
+
+	// 	const handleChange = (event) => {
+	// 		if (event.target.files[0]) {
+	// 			setImage(event.target.files[0]);
+	// 		}
+	// 	};
+
+	// 	const handleUpload = () => {
+	// 		setTimeout(() => {
+	// 			setModal(!setModal);
+	// 		}, 10000);
+	//     setTimeout(()=>{
+	//       setUploadPost(!uploadPost);
+
+	//     },5000)
+	// 		const uploadTask = storage.ref(`images/${image.name}`).put(image);
+	// 		uploadTask.on(
+	// 			"state_changed",
+	// 			(snapshot) => {
+	// 				const progress = Math.round(
+	// 					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+	// 				);
+	// 				setProgress(progress);
+	// 			},
+	// 			(error) => {
+	// 				console.log(error);
+	// 			},
+	// 			() => {
+	// 				storage
+	// 					.ref("images")
+	// 					.child(image.name)
+	// 					.getDownloadURL()
+	// 					.then((url) => {
+	// 						setUrl(url);
+
+	// 						console.log(Url);
+	// 					});
+	// 				console.log(Url, "last url");
+	// 			}
+	// 		);
+	// 	};
 	const imageInput = useRef(null);
-	const [image, setImage] = useState(null);
 	const [data, setData] = useState("");
 	const [status, setStatus] = useState("");
 	const [emojimodel, setEmojiModel] = useState(false);
-	const [Url, setUrl] = useState("");
+	const [imageurl, setUrl] = useState("");
 	const [progress, setProgress] = useState(0);
 	const [fbData, setFbData] = useState([]);
 	const [uploadPost, setUploadPost] = useState(false);
+	
 	const userName = "MMO";
 	const userImageLink =
-		"https://firebasestorage.googleapis.com/v0/b/facebook-clone-8f5aa.appspot.com/o/userimage%2F610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png?alt=media&token=513a64f2-531a-450e-8013-6347a55a70dd";
-	const newData = {
-		username: userName,
-		title: Url,
-		description: status,
-		userImage: userImageLink,
-	};
-setTimeout(()=>{
-  if (uploadPost === true) {
-		fetch("http://localhost:5055", {
-			method: "POST",
-			body: JSON.stringify(newData),
-			headers: { "Content-type": "application/json; charset=UTF-8" },
-		}).then((response) => response.json(newData) ,console.log("done"));
+	"https://firebasestorage.googleapis.com/v0/b/facebook-clone-8f5aa.appspot.com/o/userimage%2F610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png?alt=media&token=513a64f2-531a-450e-8013-6347a55a70dd";
+	const [image, setImage] = useState(null);
+		// const newData = {
+		// 	username: userName,
+		// 	title: Url,
+		// 	description: status,
+		// 	userImage: userImageLink,
+		// };
+	const handleUpload = () => {
+		const uploadTask = storage.ref(`images/${image.name}`).put(image);
+		uploadTask.on("state_changed",(snapshot)=>{},error =>{console.log(error)},()=>{
+			storage.ref("images").child(image.name).getDownloadURL().then(url =>{
+				const URL = url
+			
+				console.log(URL)
+				
+					const setDataPost = ({
+						title:URL,
+						description:status,
+						username:"mmo",
+						
+					})
+					setModal(!setModal);
+					console.log(setDataPost)
+						fetch("http://localhost:5055", {
+							method: "POST",
+							body: JSON.stringify(setDataPost),
+							headers: { "Content-type": "application/json; charset=UTF-8" },
+						}).then((response) => response.json(setDataPost) ,console.log("done"));		 
+				
+				
+			})
+		})
 	}
-  else{
-    return
-  
-  }
-},6000)
 	
-
+	
+	const getImage = () => {
+		imageInput.current.click();
+	};
 	const handleChange = (event) => {
 		if (event.target.files[0]) {
 			setImage(event.target.files[0]);
 		}
-	};
-
-	const handleUpload = () => {
-		setTimeout(() => {
-			setModal(!setModal);
-		}, 10000);
-    setTimeout(()=>{
-      setUploadPost(!uploadPost);
-
-    },5000)
-		const uploadTask = storage.ref(`images/${image.name}`).put(image);
-		uploadTask.on(
-			"state_changed",
-			(snapshot) => {
-				const progress = Math.round(
-					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-				);
-				setProgress(progress);
-			},
-			(error) => {
-				console.log(error);
-			},
-			() => {
-				storage
-					.ref("images")
-					.child(image.name)
-					.getDownloadURL()
-					.then((url) => {
-						setUrl(url);
-
-						console.log(Url);
-					});
-				console.log(Url, "last url");
-			}
-		);
-	};
-	const getImage = () => {
-		imageInput.current.click();
-	};
-
+	}
+	
 	return (
 		<>
 			<div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/12 shadow-2xl rounded-xl bg-white z-50  ">
@@ -167,7 +202,7 @@ setTimeout(()=>{
 				</div>
 				<div className="flex justify-center mb-5">
 					<button
-						className="w-10/12 mx-auto rounded-lg bg-btn-blue text-white  py-2 text-lg font-bold tracking-widest"
+						className="w-10/12 mx-auto rounded-lg bg-btn-bluee bg-blue-400 text-white  py-2 text-lg font-bold tracking-widest"
 						onClick={handleUpload}
 					>
 						post

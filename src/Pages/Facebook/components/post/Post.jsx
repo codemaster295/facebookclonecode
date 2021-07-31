@@ -29,8 +29,11 @@ const Post = (props) => {
       <div className="space-x-5">
         <div className="flex relative items-center w-full justify-between p-5">
           <div className="userwraper flex items-center space-x-5 ">
-            <span className="w-2/12 rounded-full overflow-hidden ">
-              <img src={props.userImg} alt="" />
+            <span className=" rounded-full overflow-hidden ">
+            <AccountCircle
+            className="text-gray-300 cursor-pointer transform scale-100 hover:scale-105 transition-all duration-100 ease"
+            style={{ fontSize: 45 }}
+          />
             </span>
             <div className="space-y-2">
               <h1 className="username text-sm cursor-pointer">
@@ -57,7 +60,7 @@ const Post = (props) => {
       </div>
       <img
         alt=""
-        className="imgBox w-full object-cover"
+        className="imgBox w-full object-contain"
         style={{ height: 450 }}
         src={props.img}
       />
