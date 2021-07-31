@@ -11,7 +11,7 @@ const Feed = () => {
   useEffect(() => {
     axios
       .get(
-        "https://api.unsplash.com/photos/?client_id=SFVnJp_wl_0VdkPEul9E4_6-CC6n4r8nzZQn4jVoeLw"
+        "http://localhost:5055"
       )
       .then((d) => {
         setFbData(d.data);
@@ -31,13 +31,10 @@ const Feed = () => {
         {fbData &&
           fbData.map((props, i) => (
             <Post
-              key={fbData[i].id}
-              userImg = {fbData[i].user.profile_image.large}
-              status={fbData[i].alt_description}
-              img={fbData[i].urls.full}
-              username={fbData[i].user.name}
-              likes={fbData[i].likes}
-              time={fbData[i].created_at}
+              status={fbData[i].description}
+              img={fbData[i].title}
+              username={fbData[i].username}
+              usrimg={fbData[i].userImage}
             />
           ))}
       </div>
