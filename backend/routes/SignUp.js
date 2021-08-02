@@ -13,12 +13,12 @@ router.get('/', async (req, res) => {
   });
   router.post('/signup', async (req, res) => {
     const signup = new Signupdetails({
-        name:req.body.fname,
-        surname:req.body.lname,
+        name:req.body.name,
+        surname:req.body.surname,
         email:req.body.email,
         password:req.body.password,
-        birthdate:req.body.day,
-        gender:req.body.Male                                                                                                                                                                                                                                                
+        birthdate:req.body.birthdate,
+        gender:req.body.gender
     });
     // signup.save().then((res)=>{
     //     res.json(res)

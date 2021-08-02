@@ -5,7 +5,7 @@ const signUpSchema = mongoose.Schema({
     surname:String,
     email:String,
     password:String,
-    birthdate:Date,
+    birthdate:String,
     gender:String
 })
 module.exports = mongoose.model('Signupdetails' ,signUpSchema)

@@ -16,12 +16,9 @@ const SignUpPopUp = ({ closepopup }) => {
     const [year , setYear] =useState("")
     const [gender,setGender]=useState("")
     const [genderpopup , setGenderPopUp]=useState(false)
-    const birthDate = {
-        day:day ,
-        month:month,
-        year:year
-    }
-    console.log(gender)
+    
+    const birthDate =`${day}/${month}/${year}`
+    console.log(birthDate)
     const signUpDetails={
         name:fname,
         surname:surname,
@@ -32,11 +29,13 @@ const SignUpPopUp = ({ closepopup }) => {
     }
     console.log(signUpDetails)
     const handleSignUpSubmit = ()=>{
-        fetch("http://localhost:5055", {
+        
+        fetch("http://localhost:5055/signup/signup", {
             method: "POST",
             body: JSON.stringify(signUpDetails),
             headers: { "Content-type": "application/json; charset=UTF-8" },
-      }).then((response) => response.json(signUpDetails) ,console.log("done"));
+      }).then((response) => response.json(signUpDetails) ,console.log("done") ,);
+      
     }
 
     
@@ -103,18 +102,18 @@ const SignUpPopUp = ({ closepopup }) => {
                                         <option className="text-xs font-semibold" value="31">31</option>
                                     </select>
                                     <select name="month" id="month" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e)=>{setMonth(e.target.value)}} >
-                                        <option className="text-xs font-semibold" value="jan">jan</option>
-                                        <option className="text-xs font-semibold" value="feb">feb</option>
-                                        <option className="text-xs font-semibold" value="mar">mar</option>
-                                        <option className="text-xs font-semibold" value="apr">apr</option>
-                                        <option className="text-xs font-semibold" value="may">may</option>
-                                        <option className="text-xs font-semibold" value="jun">jun</option>
-                                        <option className="text-xs font-semibold" value="jul">jul</option>
-                                        <option className="text-xs font-semibold" value="aug">aug</option>
-                                        <option className="text-xs font-semibold" value="sep">sep</option>
-                                        <option className="text-xs font-semibold" value="oct">oct</option>
-                                        <option className="text-xs font-semibold" value="nov">nov</option>
-                                        <option className="text-xs font-semibold" value="dec">dec</option>
+                                        <option className="text-xs font-semibold" value="1">jan</option>
+                                        <option className="text-xs font-semibold" value="2">feb</option>
+                                        <option className="text-xs font-semibold" value="3">mar</option>
+                                        <option className="text-xs font-semibold" value="4">apr</option>
+                                        <option className="text-xs font-semibold" value="5">may</option>
+                                        <option className="text-xs font-semibold" value="6">jun</option>
+                                        <option className="text-xs font-semibold" value="7">jul</option>
+                                        <option className="text-xs font-semibold" value="8">aug</option>
+                                        <option className="text-xs font-semibold" value="9">sep</option>
+                                        <option className="text-xs font-semibold" value="10">oct</option>
+                                        <option className="text-xs font-semibold" value="11">nov</option>
+                                        <option className="text-xs font-semibold" value="12">dec</option>
                                     </select>
                                     <select name="year" id="year" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e)=>{setYear(e.target.value)}}>
                                         <option className="text-xs font-semibold" value="2021" selected="1">2021</option>
