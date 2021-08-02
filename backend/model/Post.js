@@ -9,4 +9,5 @@ const PostSchema = mongoose.Schema({
     userImage:String
 
 })
+
 module.exports = mongoose.model('Posts', PostSchema)

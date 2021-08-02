@@ -10,12 +10,15 @@ router.get('/', async (req, res) => {
     res.json({ message: err })
   }
 });
+
 router.post('/', async (req, res) => {
   const post = new Post({
     title: req.body.title,
     description: req.body.description,
     username: req.body.username
+
   });
+
   try {
 
     const savedPost = await post.save();
@@ -26,5 +29,6 @@ router.post('/', async (req, res) => {
 
 
 })
+
 
 module.exports = router;

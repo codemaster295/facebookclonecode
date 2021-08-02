@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import SignUpPopUp from "./SignUpPopUp";
 
 const Login = () => {
   //     var c = "My name is meet"
@@ -11,6 +12,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signUp , setSignUp] =useState(false)
   let permission = "";
   if (email === "meet@gmail.com" && password === "1234") {
     permission = "/Facebook";
@@ -22,11 +24,14 @@ const Login = () => {
     e.preventDefault();
     
   };
+  const CloseSignUpPopUp = () =>{
+    setSignUp(!signUp)
+  }
   return (
-    <div>
+    <div className="relative z-0">
       <div className="container mx-auto px-4">
-        <div className="lg:w-8/12 w-full mx-auto h-screen">
-          <div className="flex lg:flex-row  flex-col lg:space-y-0 space-y-10 h-full justify-center lg:justify-between items-center">
+        <div className="lg:w-8/12 w-full mx-auto">
+          <div className="flex lg:flex-row h-screen  flex-col lg:space-y-0 space-y-10  justify-center lg:justify-between items-center">
             <div className="lg:w-1/2 w-full space-y-5">
               <h1 className="text-btn-blue text-3xl md:text-5xl tracking-widest font-bold text-left">
                 facebook
@@ -62,17 +67,18 @@ const Login = () => {
                   >
                     <button className="p-5">Log In</button>
                   </Link>
-                  <Link to={"/"} className="w-1/2 block mx-auto outline-none border border-gray-400 rounded-xl text-base text-white py-2.5 px-1 bg-btn-green">
-                    <button className="w-full" type="submit">
+                  <div className="w-1/2 block mx-auto outline-none border border-gray-400 rounded-xl text-base text-white py-2.5 px-1 bg-btn-green">
+                    <button className="w-full" type="submit" onClick={()=>{setSignUp(!signUp)}}>
                       Create New Account
                     </button>
-                  </Link>
+                  </div>
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {signUp?<SignUpPopUp closepopup={CloseSignUpPopUp} />:null}
     </div>
   );
 };

@@ -11,6 +11,7 @@ app.use(bodyParser.json())
 
 const postRoute =require('./routes/Posts')
 app.use('/posts' , postRoute)
+app.use('/signup' , postRoute)
 app.use('/' , postRoute)
 
 // Routes
