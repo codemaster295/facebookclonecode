@@ -7,6 +7,8 @@ import {
 	Lock,
 	PhotoLibrary,
 } from "@material-ui/icons";
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import GroupIcon from "@material-ui/icons/Group";
 import Feelactivities from "../feelings/Feelactivities";
 import { storage } from "../../../firebase";
@@ -22,14 +24,23 @@ const PostPopUp = ({ setModal , setReload }) => {
 	const [progress, setProgress] = useState(0);
 	const [fbData, setFbData] = useState([]);
 	const [uploadPost, setUploadPost] = useState(false);
+	const [process ,setProcess] =useState("0")
+	const [loader ,setLoader] =useState(false)
 	
 	const userName = "MMO";
 	const userImageLink =
 	"https://firebasestorage.googleapis.com/v0/b/facebook-clone-8f5aa.appspot.com/o/userimage%2F610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png?alt=media&token=513a64f2-531a-450e-8013-6347a55a70dd";
 	const [image, setImage] = useState(null);
 	const handleUpload = () => {
+		setLoader(!loader)
 		const uploadTask = storage.ref(`images/${image.name}`).put(image);
-		uploadTask.on("state_changed",(snapshot)=>{},error =>{console.log(error)},()=>{
+		uploadTask.on("state_changed",(snapshot)=>{
+			const progress = Math.round(
+				(snapshot.bytesTransferred/snapshot.totalBytes)*100
+				)
+				setProgress(progress)
+				console.log(progress)
+		},error =>{console.log(error)},()=>{
 			storage.ref("images").child(image.name).getDownloadURL().then(url =>{
 				const URL = url
 			
@@ -96,6 +107,11 @@ const PostPopUp = ({ setModal , setReload }) => {
 						</div>
 					</div>
 					<div className="flex w-full justify-center items-center ">
+         				{	loader? <div className="w-full h-full flex justify-center items-center absolute bg-white bg-opacity-75">
+						 	<CircularProgress variant="determinate" value={progress} />
+						 </div>:""
+						}
+
 						<textarea
 							onChange={(e) => {
 								setStatus(e.target.value);
@@ -110,6 +126,7 @@ const PostPopUp = ({ setModal , setReload }) => {
 						{/* <img src={url} alt="" /> */}
 					</div>
 				</div>
+
 				<div className="flex items-center w-full justify-around p-5">
 					<input
 						className="hidden imageUploader"

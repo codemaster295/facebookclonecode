@@ -66,8 +66,8 @@ const Post = (props) => {
         src={props.img}
       />
       <div className="box ">
-        <span className="w-full block pl-5 pt-3 text-gray-500 font-bold text-sm tracking-widest">
-          {props.likes + pageLike} Likes
+      <span className="w-full block pl-5 pt-3 text-gray-500 font-bold text-sm tracking-widest">
+          {props.like + pageLike} Likes
         </span>
         <div className="w-full flex items-center my-2">
           <div

@@ -38,6 +38,7 @@ const changeState = () =>{
             <Post
             id={fbData[i]._id}
               status={fbData[i].description}
+              like={fbData[i].like}
               img={fbData[i].title}
               username={fbData[i].username}
               usrimg={fbData[i].userImage}

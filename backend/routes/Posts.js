@@ -17,7 +17,8 @@ router.post('/', async (req, res) => {
   const post = new Post({
     title: req.body.title,
     description: req.body.description,
-    username: req.body.username
+    username: req.body.username,
+    like:""
 
   });
 
