@@ -8,7 +8,7 @@ import React from "react";
 import { useState, useRef } from "react";
 import PostPopUp from "../createnewpostpopup/PostPopUp";
 import Livepopup from "../livepopup/Livepopup";
-const CreatePost = () => {
+const CreatePost = ({reload}) => {
   const [openModal , setModal]=useState(false)
   const [openLive , setLive]=useState(false)
   const imageInput = useRef(null);
@@ -59,7 +59,7 @@ const CreatePost = () => {
           </div>
         </div>
       </div>
-      {openModal?<PostPopUp setModal={setModal} />:""}
+      {openModal?<PostPopUp setReload={reload} setModal={setModal} />:""}
       {openLive?<Livepopup setLive={setLive}/>:"" }
       
     </>

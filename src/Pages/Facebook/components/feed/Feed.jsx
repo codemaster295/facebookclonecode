@@ -10,6 +10,7 @@ const Feed = () => {
   const [fbData, setFbData] = useState("");
   const [reload , setReload]=useState(true)
   useEffect(() => {
+    console.log("useefffcet");
     axios
       .get(
         "http://localhost:5055"
@@ -20,15 +21,17 @@ const Feed = () => {
       .catch((Err) => {
         console.log(Err);
       });
-  }, []);
-
+  }, [reload]);
+const changeState = () =>{
+  setReload(!reload)
+}
   
 
   return (
     <div className="w-full space-y-20 absolute h-screen top-24  z-0 p-2">
       <div className="w-8/12 mx-auto space-y-10">
         <CreateStory />
-        <CreatePost />
+        <CreatePost reload={changeState} />
         <CreateRoom />
         {fbData &&
           fbData.map((props, i) => (

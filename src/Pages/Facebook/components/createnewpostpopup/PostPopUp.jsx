@@ -11,8 +11,9 @@ import GroupIcon from "@material-ui/icons/Group";
 import Feelactivities from "../feelings/Feelactivities";
 import { storage } from "../../../firebase";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-const PostPopUp = ({ setModal }) => {
+const PostPopUp = ({ setModal , setReload }) => {
 	const imageInput = useRef(null);
 	const [data, setData] = useState("");
 	const [status, setStatus] = useState("");
@@ -46,7 +47,8 @@ const PostPopUp = ({ setModal }) => {
 							method: "POST",
 							body: JSON.stringify(setDataPost),
 							headers: { "Content-type": "application/json; charset=UTF-8" },
-						}).then((response) => response.json(setDataPost) ,console.log("done"));		 
+						}).then((response) => response.json(setDataPost) ,console.log("done"));	
+						setReload()	 
 				
 				
 			})
@@ -139,12 +141,11 @@ const PostPopUp = ({ setModal }) => {
 					/>
 				</div>
 				<div className="flex justify-center mb-5">
-					<button
-						className="w-10/12 mx-auto rounded-lg bg-btn-bluee bg-blue-400 text-white  py-2 text-lg font-bold tracking-widest"
-						onClick={handleUpload}
-					>
-						post
-					</button>
+						<button
+							className="w-10/12 mx-auto rounded-lg bg-btn-bluee bg-blue-400 text-white  py-2 text-lg font-bold tracking-widest"
+							onClick={handleUpload}>
+							post
+						</button>
 				</div>
 			</div>
 			{emojimodel ? <Feelactivities setEmojiBox={setEmojiModel} /> : ""}

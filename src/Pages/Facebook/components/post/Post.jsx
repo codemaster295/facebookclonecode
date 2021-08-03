@@ -27,7 +27,6 @@ const Post = (props) => {
     // console.log(pageLike);
   return (
     <div className="w-10/12 mx-auto shadow-lg bg-white">
-      {props.id}
       <div className="space-x-5">
         <div className="flex relative items-center w-full justify-between p-5">
           <div className="userwraper flex items-center space-x-5 ">
