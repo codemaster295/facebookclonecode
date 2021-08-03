@@ -15,6 +15,8 @@ const CreatePost = () => {
   const getImage = () => {
     imageInput.current.click();
   };
+  
+
   return (
     <>
       <div className="w-10/12 mx-auto  bg-white shadow-lg">

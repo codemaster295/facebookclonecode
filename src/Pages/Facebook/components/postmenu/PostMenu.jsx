@@ -1,10 +1,25 @@
 import { faBell, faBellSlash, faBookmark, faBoxOpen, faCalendar, faEdit, faLanguage, faLock, faSave, faTransgender, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-const PostMenu = () => {
+const PostMenu = (props) => {
     
+    const deletePost = ()=>{
+        
+        fetch(`http://localhost:5055/${props.id}`, {
+            method: "DELETE",
+           
+      }).then((result)=>{
+          result.json().then((resp)=>{
+              alert('deleted')
+          })
+      })
+      
+    }
+   
     return (
         <div className="postmenu bg-white border absolute top-0 right-14 w-1/2 ">
             <div className="space-y-3 p-2">
@@ -42,10 +57,12 @@ const PostMenu = () => {
                 </div>
                 <div className="flex items-center space-x-5 bg-white hover:bg-gray-300 transition-all duration-100 ease-linear rounded-lg cursor-pointer p-3">
                     <FontAwesomeIcon icon={faTrash} className="text-xl text-indigo-500" />
-                    <span className="space-y-1">
+                    
+                    <span className="space-y-1" onClick={deletePost}>
                         <h1 className="text-black font-semibold text-base tracking-widest">Move to Reacycle bin</h1>
                         <h1 className="text-gray-500 text-xs tracking-normal">Items in your Recycle bin are deleted after 30 days.</h1>
                     </span>
+                 
                 </div>               
             </div>
         </div>

@@ -13,62 +13,6 @@ import { storage } from "../../../firebase";
 import axios from "axios";
 
 const PostPopUp = ({ setModal }) => {
-
-	// setTimeout(()=>{
-	//   if (uploadPost === true) {
-	// 		fetch("http://localhost:5055", {
-	// 			method: "POST",
-	// 			body: JSON.stringify(newData),
-	// 			headers: { "Content-type": "application/json; charset=UTF-8" },
-	// 		}).then((response) => response.json(newData) ,console.log("done"));
-	// 	}
-	//   else{
-	//     return
-
-	//   }
-	// },6000)
-
-
-	// 	const handleChange = (event) => {
-	// 		if (event.target.files[0]) {
-	// 			setImage(event.target.files[0]);
-	// 		}
-	// 	};
-
-	// 	const handleUpload = () => {
-	// 		setTimeout(() => {
-	// 			setModal(!setModal);
-	// 		}, 10000);
-	//     setTimeout(()=>{
-	//       setUploadPost(!uploadPost);
-
-	//     },5000)
-	// 		const uploadTask = storage.ref(`images/${image.name}`).put(image);
-	// 		uploadTask.on(
-	// 			"state_changed",
-	// 			(snapshot) => {
-	// 				const progress = Math.round(
-	// 					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-	// 				);
-	// 				setProgress(progress);
-	// 			},
-	// 			(error) => {
-	// 				console.log(error);
-	// 			},
-	// 			() => {
-	// 				storage
-	// 					.ref("images")
-	// 					.child(image.name)
-	// 					.getDownloadURL()
-	// 					.then((url) => {
-	// 						setUrl(url);
-
-	// 						console.log(Url);
-	// 					});
-	// 				console.log(Url, "last url");
-	// 			}
-	// 		);
-	// 	};
 	const imageInput = useRef(null);
 	const [data, setData] = useState("");
 	const [status, setStatus] = useState("");
@@ -82,12 +26,6 @@ const PostPopUp = ({ setModal }) => {
 	const userImageLink =
 	"https://firebasestorage.googleapis.com/v0/b/facebook-clone-8f5aa.appspot.com/o/userimage%2F610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png?alt=media&token=513a64f2-531a-450e-8013-6347a55a70dd";
 	const [image, setImage] = useState(null);
-		// const newData = {
-		// 	username: userName,
-		// 	title: Url,
-		// 	description: status,
-		// 	userImage: userImageLink,
-		// };
 	const handleUpload = () => {
 		const uploadTask = storage.ref(`images/${image.name}`).put(image);
 		uploadTask.on("state_changed",(snapshot)=>{},error =>{console.log(error)},()=>{

@@ -22,10 +22,12 @@ const Post = (props) => {
   const commentBtn = () => {
     commentBar.current.focus();
   };
+
     // console.log(count);
     // console.log(pageLike);
   return (
     <div className="w-10/12 mx-auto shadow-lg bg-white">
+      {props.id}
       <div className="space-x-5">
         <div className="flex relative items-center w-full justify-between p-5">
           <div className="userwraper flex items-center space-x-5 ">
@@ -49,7 +51,7 @@ const Post = (props) => {
               </div>
             </div>
           </div>
-          {menuOpen?<PostMenu />:null}
+          {menuOpen?<PostMenu id={props.id} />:null}
           <span onClick={()=>{setMenuOpen(!menuOpen)}}>
             < MoreHoriz className="cursor-pointer" />
           </span>

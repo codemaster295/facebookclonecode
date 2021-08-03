@@ -10,6 +10,7 @@ const Signup = require("./routes/SignUp")
 // import routs
 
 const postRoute = require('./routes/Posts')
+const Post =require('./model/Post')
 app.use('/posts', postRoute)
 app.use('/signup', Signup)
 app.use('/', postRoute)
@@ -23,6 +24,14 @@ app.get('/', (req, res) => {
 app.get('/posts', (req, res) => {
     res.send('we are on posts')
 })
+
+app.delete('/:id', function (req, res) {
+    Post.deleteOne({ _id: req.params.id }).then((result) => {
+        res.json(result);
+    }).catch(err => {
+        console.warn(err);
+    });
+  })
 
 
 

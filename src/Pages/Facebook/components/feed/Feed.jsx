@@ -8,6 +8,7 @@ import axios from "axios";
 const Feed = () => {
 
   const [fbData, setFbData] = useState("");
+  const [reload , setReload]=useState(true)
   useEffect(() => {
     axios
       .get(
@@ -21,6 +22,7 @@ const Feed = () => {
       });
   }, []);
 
+  
 
   return (
     <div className="w-full space-y-20 absolute h-screen top-24  z-0 p-2">
@@ -31,6 +33,7 @@ const Feed = () => {
         {fbData &&
           fbData.map((props, i) => (
             <Post
+            id={fbData[i]._id}
               status={fbData[i].description}
               img={fbData[i].title}
               username={fbData[i].username}
@@ -38,6 +41,7 @@ const Feed = () => {
             />
           ))}
       </div>
+      
     </div>
   );
 };
