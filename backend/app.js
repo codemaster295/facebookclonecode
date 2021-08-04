@@ -5,6 +5,7 @@ require('dotenv/config')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const Signup = require("./routes/SignUp")
+const db =mongoose
 // middelware
 
 // import routs
@@ -38,6 +39,7 @@ app.delete('/:id', function (req, res) {
 // connect to db 
 
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+
     console.log("connected to db")
 })
 app.listen(5055)

@@ -91,7 +91,7 @@ const PostPopUp = ({ setModal , setReload }) => {
 					</span>
 					<div className="userwraper flex items-center space-x-3 px-5 ">
 						<AccountCircle
-							className="text-gray-300 cursor-pointer "
+							className="text-gray-300 cursor-pointer  "
 							style={{ fontSize: 45 }}
 						/>
 						<div className="space-y-1">
@@ -108,7 +108,7 @@ const PostPopUp = ({ setModal , setReload }) => {
 					</div>
 					<div className="flex w-full justify-center items-center ">
          				{	loader? <div className="w-full h-full flex justify-center items-center absolute bg-white bg-opacity-75">
-						 	<CircularProgress variant="determinate" value={progress} />
+						 	<CircularProgress variant="determinate" className="!text-btn-blue" value={progress} />
 						 </div>:""
 						}
 

@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+          
 
   
 router.post('/', async (req, res) => {
@@ -18,12 +19,11 @@ router.post('/', async (req, res) => {
     title: req.body.title,
     description: req.body.description,
     username: req.body.username,
-    like:""
-
+    like:"",
   });
 
-  try {
 
+  try {
     const savedPost = await post.save();
     res.json(savedPost)
   } catch (err) {

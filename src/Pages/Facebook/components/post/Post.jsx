@@ -22,7 +22,10 @@ const Post = (props) => {
   const commentBtn = () => {
     commentBar.current.focus();
   };
-
+  const [menu , setmenu] =useState(false)
+  const menuclosed = () =>{
+    setmenu(!menu)
+  }
     // console.log(count);
     // console.log(pageLike);
   return (
@@ -50,7 +53,7 @@ const Post = (props) => {
               </div>
             </div>
           </div>
-          {menuOpen?<PostMenu id={props.id} />:null}
+          {menuOpen?<PostMenu reloadmenu={props.reload } menuclose={menuclosed} id={props.id} />:null}
           <span onClick={()=>{setMenuOpen(!menuOpen)}}>
             < MoreHoriz className="cursor-pointer" />
           </span>

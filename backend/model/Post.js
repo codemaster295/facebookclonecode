@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const PostSchema = mongoose.Schema({
+    
     username: String,
     title: {
         required:true,
@@ -7,9 +8,7 @@ const PostSchema = mongoose.Schema({
     },
     description: String,
     userImage:String,
-    like:String
-    
-
+    like:String,
 })
 
 module.exports = mongoose.model('Posts', PostSchema)
