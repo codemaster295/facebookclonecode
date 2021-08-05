@@ -33,6 +33,13 @@ app.delete('/:id', function (req, res) {
         console.warn(err);
     });
   })
+  app.put('/:id',(req,res)=>{
+    Post.updateOne({ _id: req.body.id },{
+        $set:{
+          title:req.body.title
+      }
+      })
+  })
 
 
 

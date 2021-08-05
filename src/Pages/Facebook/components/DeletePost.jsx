@@ -19,15 +19,15 @@ const DeletePost = (props) => {
 }
     return (
         <div className="fixed top-0 left-0 bg-white bg-opacity-80 flex justify-center items-center z-50 w-full h-full">
-            <div className="w-1/3 bg-white shadow-2xl p-5">
-                 <div className="flex relative justify-between items-center mt-4">
+            <div className="w-1/3 bg-white shadow-2xl p-5 space-y-5">
+                 <div className="flex relative justify-between items-center ">
                     <h1 className="text-xl font-bold tracking-widest">Move to your recycle bin?</h1>
                     <span className="absolute top-1/2 right-0 transform -translate-y-1/2 cursor-pointer hover:bg-gray-400 hover:text-gray-600 transition-all duration-100 ease-linear  bg-gray-300 rounded-full w-8 h-8 flex justify-center items-center" onClick={props.propspopup}>
                         <FontAwesomeIcon icon={faTimes} className="text-xl font-thin text-gray-500 " />
                     </span>
                 </div>
                 <div className="">
-                     <p>Items in your recycle bin will be automatically deleted after 30 days. You can delete them earlier from your recycle bin by going to "Activity log" in your settings.</p>
+                     <p className="font-semibold tracking-widest text-black">Items in your recycle bin will be automatically deleted after 30 days. You can delete them earlier from your recycle bin by going to "Activity log" in your settings.</p>
                 </div>
                 <div className="flex justify-end items-center">
                     <div className="space-x-5">

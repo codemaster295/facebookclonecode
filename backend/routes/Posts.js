@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
     title: req.body.title,
     description: req.body.description,
     username: req.body.username,
-    like:"",
+    like:req.body.like
   });
 
 
@@ -34,4 +34,4 @@ router.post('/', async (req, res) => {
 })
 
 
-module.exports = router;
+module.exports = router

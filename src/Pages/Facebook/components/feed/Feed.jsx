@@ -8,6 +8,7 @@ import axios from "axios";
 const Feed = () => {
 	const [fbData, setFbData] = useState([]);
 	const [reload, setReload] = useState(true);
+	const [emoji , setEmoji]  =useState("")
   const [index , setIndex]=useState()
 	useEffect(() => {
 		console.log("useefffcet");
@@ -19,41 +20,18 @@ const Feed = () => {
 			.catch((Err) => {
 				console.log(Err);
 			});
-	}, [reload]);
-	const changeState = () => {
-		setReload(!reload);
-	};
- 
-	// console.log(fbData)
-	// for (let i=0 ; i<=5 ;i--){
-	// console.log(i)
-	// }
-  // var i=0
-  // for (i = fbData.length; i >= 0 && i <=fbData.length; i--) {
-	// 	// setIndex(i)
-  //   // console.log(index)
-  //   console.log(fbData[i])
-   
-
-    
-	// }
-
-
+			
+		}, [reload]);
+		const changeState = () => {
+			setReload(!reload);
+		};
 	return (
 		<div className="w-full space-y-20 absolute h-screen top-24  z-0 p-2">
-			<div className="w-8/12 mx-auto space-y-10">
+			<div className="w-8/12 mx-auto space-y-10">	
 				<CreateStory />
 				<CreatePost reload={changeState} />
 				<CreateRoom />
-        {/* <Post
-							id={fbData[(fbData.length)-1]._id}
-							status={fbData[(fbData.length)-1].description}
-							like={fbData[(fbData.length)-1].like}
-							img={fbData[(fbData.length)-1].title}
-							username={fbData[(fbData.length)-1].username}
-							usrimg={fbData[(fbData.length)-1].userImage}
-						/> */}
-				{fbData &&
+			    {fbData &&
 					fbData.map((props , i) => (
             
 						<Post
@@ -66,7 +44,6 @@ const Feed = () => {
 							usrimg={fbData[i].userImage}
 						/>
 					))}
-          
 			</div>
 		</div>
 	);
