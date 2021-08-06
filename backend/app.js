@@ -5,10 +5,14 @@ require('dotenv/config')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const Signup = require("./routes/SignUp")
+<<<<<<< HEAD
 const userdetails = require('./model/UserDetail')
 const crypto =require('crypto')
 var key = "password"
 var algo = 'aes256'
+=======
+const db =mongoose
+>>>>>>> a4db89fecb6f1688b8321913cb9729b419a576a5
 // middelware
 
 // import routs
@@ -67,12 +71,20 @@ app.delete('/:id', function (req, res) {
         console.warn(err);
     });
   })
+  app.put('/:id',(req,res)=>{
+    Post.updateOne({ _id: req.body.id },{
+        $set:{
+          title:req.body.title
+      }
+      })
+  })
 
 
 
 // connect to db 
 
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+
     console.log("connected to db")
 })
 app.listen(5055)

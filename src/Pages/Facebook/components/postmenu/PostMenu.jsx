@@ -4,24 +4,24 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import DeletePost from '../DeletePost'
 
-const PostMenu = (props) => {
+const PostMenu = (props ) => {
     
-    const deletePost = ()=>{
-        
-        fetch(`http://localhost:5055/${props.id}`, {
-            method: "DELETE",
-           
-      }).then((result)=>{
-          result.json().then((resp)=>{
-              alert('deleted')
-          })
-      })
-      
-    }
+    const [deletemenu , setDeleteMenu] =useState(false)
+    const [setDeletePost ,deletePost ]=useState(false)
    
+    
+    const menupopup = () =>{
+        setDeleteMenu(!deletemenu)
+    }
+    const deletepost = () =>{
+        setDeletePost(!deletePost)
+    }
+    
     return (
         <div className="postmenu bg-white border absolute top-0 right-14 w-1/2 ">
+            
             <div className="space-y-3 p-2">
                 <div className="flex items-center space-x-5  bg-white hover:bg-gray-300 transition-all duration-100 ease-linear rounded-lg cursor-pointer p-3">
                     <FontAwesomeIcon icon={faSave} className="text-xl text-gray-700" />
@@ -58,10 +58,11 @@ const PostMenu = (props) => {
                 <div className="flex items-center space-x-5 bg-white hover:bg-gray-300 transition-all duration-100 ease-linear rounded-lg cursor-pointer p-3">
                     <FontAwesomeIcon icon={faTrash} className="text-xl text-indigo-500" />
                     
-                    <span className="space-y-1" onClick={deletePost}>
+                    <span className="space-y-1" onClick={()=>{setDeleteMenu(true)}}>
                         <h1 className="text-black font-semibold text-base tracking-widest">Move to Reacycle bin</h1>
                         <h1 className="text-gray-500 text-xs tracking-normal">Items in your Recycle bin are deleted after 30 days.</h1>
                     </span>
+                    {deletemenu?<DeletePost propsreload={props.reloadmenu} propspopup={menupopup} propsmenu={props.menuclose}  propsdelete={deletepost} id={props.id} />:""}
                  
                 </div>               
             </div>

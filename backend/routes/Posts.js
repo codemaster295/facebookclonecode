@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+          
 
   
 router.post('/', async (req, res) => {
@@ -18,12 +19,11 @@ router.post('/', async (req, res) => {
     title: req.body.title,
     description: req.body.description,
     username: req.body.username,
-    like:""
-
+    like:req.body.like
   });
 
-  try {
 
+  try {
     const savedPost = await post.save();
     res.json(savedPost)
   } catch (err) {
@@ -34,4 +34,4 @@ router.post('/', async (req, res) => {
 })
 
 
-module.exports = router;
+module.exports = router
