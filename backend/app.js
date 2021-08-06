@@ -5,6 +5,10 @@ require('dotenv/config')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const Signup = require("./routes/SignUp")
+const userdetails = require('./model/UserDetail')
+const crypto =require('crypto')
+var key = "password"
+var algo = 'aes256'
 // middelware
 
 // import routs
@@ -18,6 +22,37 @@ app.use('/', postRoute)
 // Routes
 app.get('/', (req, res) => {
     res.send('we are on home')
+})
+
+app.post('/login' , (req,res)=>{
+    var cipher = crypto.createCipher(algo,key);
+    var encrypted =cipher.update(req.body.password , 'utf8' , 'hex')
+    +cipher.final('hex')
+
+   
+    const userdata = new userdetails({
+
+        username:req.body.username,
+        email:req.body.email,
+        password:encrypted,
+        profileimage:req.body.profileimage,
+        freinds:req.body.freinds,
+        post:req.body.post,
+        birthdate:req.body.birthdate,
+        gender:req.body.gender,
+        school:req.body.school,
+        location:req.body.location,
+        hobbies:req.body.hobbies,
+        bio:req.body.bio,
+    })
+    userdata.save().then((result) => {
+        console.warn(result);
+    })
+    
+    
+    
+    res.end("hello")
+    
 })
 
 
