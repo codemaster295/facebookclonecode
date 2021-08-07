@@ -1,11 +1,17 @@
 const mongoose = require('mongoose')
 
 const signUpSchema = mongoose.Schema({
-    name:String,
-    surname:String,
-    email:String,
-    password:String,
-    birthdate:String,
-    gender:String
+   fname:String,
+   lname:String,
+   email:String,
+   password:String,
+   day:String,
+   month:String,
+   year:String,
+   female:String,
+   male:String,
+   other:String
+
+
 })
 module.exports = mongoose.model('Signupdetails' ,signUpSchema)
