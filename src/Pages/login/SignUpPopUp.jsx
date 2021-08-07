@@ -30,11 +30,11 @@ const SignUpPopUp = ({ closepopup }) => {
     console.log(signUpDetails)
     const handleSignUpSubmit = ()=>{
         
-        fetch("http://localhost:5055/signup/signup", {
+        fetch("http://localhost:5000/signup/signup", {
             method: "POST",
             body: JSON.stringify(signUpDetails),
             headers: { "Content-type": "application/json; charset=UTF-8" },
-      }).then((response) => response.json(signUpDetails) ,console.log("done") ,);
+      }).then((response) => response.json(signUpDetails) ,console.log(signUpDetails) ,);
       
     }
 
@@ -50,7 +50,7 @@ const SignUpPopUp = ({ closepopup }) => {
                         <FontAwesomeIcon icon={faTimes} className="absolute top-0 right-0 mr-3 text-xl cursor-pointer " onClick={closepopup} />
                     </div>
                     <div className="formmain">
-                        <form onSubmit={(e)=>{e.preventDefault()}}>
+                        <form action="http://localhost:5000/signup" method="POST">
                             <div className="space-y-5">
                                 <div className="flex w-full justify-between space-x-2">
                                     <input className="bg-gray-200 placeholder-gray-500 border w-full  rounded-sm outline-none p-1.5" type="text" name="fname" id="fname" placeholder="First Name" onChange={(e)=>{setFname(e.target.value)}}  required/>
@@ -242,25 +242,25 @@ const SignUpPopUp = ({ closepopup }) => {
                                         {genderpopup?<GenderPopUp />:null}
 
                                     </div>
-                                    <div className="flex items-center justify-between space-x-3">
+                                    <div className="flex items-center justify-between space-x-3"> 
                                         <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
                                             <label htmlFor="Male" className="text-xs font-semibold">Female</label>
-                                            <input placeholder="male" value="female" type="radio" name="Male" id="" onChange={(e)=>{setGender(e.target.value)}} required/>
+                                            <input placeholder="male" value="female" type="radio" name="female" id="" aria-required="true" onChange={(e)=>{setGender(e.target.value)}}/>
                                         </div>
                                         <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
                                             <label htmlFor="Male" className="text-xs font-semibold">Male</label>
-                                            <input placeholder="male" value="male" type="radio" name="Male" id=""  onChange={(e)=>{setGender(e.target.value)}} required/>
+                                            <input placeholder="male" value="male" type="radio" name="male" id=""  onChange={(e)=>{setGender(e.target.value)}}/>
                                         </div>
                                         <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
                                             <label htmlFor="Male" className="text-xs font-semibold">Other</label>
-                                            <input placeholder="male" value="other" type="radio" name="Male" id=""  onChange={(e)=>{setGender(e.target.value)}} required/>
+                                            <input placeholder="male" value="other" type="radio" name="other" id=""  onChange={(e)=>{setGender(e.target.value)}}/>
                                         </div>
                                     </div>
                                     <div className="">
                                         <p className="font-semibold tracking-tight text-xs">By clicking Sign Up, you agree to our <span className="text-btn-blue font-bold cursor-pointer">Terms</span> ,<span className="text-btn-blue font-bold cursor-pointer">Data Policy</span>  and <span className="text-btn-blue font-bold cursor-pointer">Cookie Policy</span> . You may receive SMS notifications from us and can opt out at any time.</p>
                                     </div>
                                     <div className="flex justify-center w-full items-center">
-                                        <button className="bg-btn-green w-5/12 rounded-lg py-1.5 text-lg font-bold text-white" onClick={handleSignUpSubmit}>Sign Up</button>
+                                        <button className="bg-btn-green w-5/12 rounded-lg py-1.5 text-lg font-bold text-white" >Sign Up</button>
                                     </div>
                                 </div>
                                 </div>
