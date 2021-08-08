@@ -13,7 +13,7 @@ const Feed = () => {
 	useEffect(() => {
 		console.log("useefffcet");
 		axios
-			.get("http://localhost:5055")
+			.get("http://localhost:5000")
 			.then((d) => {
 				setFbData(d.data);
 			})

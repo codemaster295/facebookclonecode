@@ -61,7 +61,7 @@ const PostPopUp = ({ setModal , setReload }) => {
 					})
 					setModal(!setModal);
 					console.log(setDataPost)
-						fetch("http://localhost:5055", {
+						fetch("http://localhost:5000", {
 							method: "POST",
 							body: JSON.stringify(setDataPost),
 							headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -100,7 +100,7 @@ const PostPopUp = ({ setModal , setReload }) => {
 	
 	return (
 		<>
-			<div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/12 shadow-2xl rounded-xl bg-white z-50  ">
+			<div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5/12 shadow-2xl rounded-xl bg-white z-50  p-5  ">
 				<div className="box space-y-5  scrollbar scrollbar-thumb-gray-300 scrollbar-track-gray-50 " style={previewImage?{height:50 +"vh" , overflowY:"scroll"}:null}>
 					<span className="font-medium relative text-lg text-black text-center block border-b-2 border-gray-200 py-2">
 						Create post
@@ -129,7 +129,7 @@ const PostPopUp = ({ setModal , setReload }) => {
 						</div>
 					</div>
 					<div className="flex flex-col w-full justify-center items-center ">
-         				{	loader? <div className="w-full h-full flex justify-center items-center absolute bg-white bg-opacity-75 z-50">
+         				{	loader? <div className="w-full h-full flex justify-center items-center rounded-xl absolute top-0 left-0 bg-white bg-opacity-75 z-50">
 						 	<CircularProgress variant="determinate" className="!text-btn-blue" value={progress} />
 						 </div>:""
 						}

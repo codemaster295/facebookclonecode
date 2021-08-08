@@ -1,9 +1,11 @@
 import { faCross, faQuestionCircle, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Email } from '@material-ui/icons'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import DatePopUp from './DatePopUp'
 import GenderPopUp from './GenderPopUp'
+import EmailVarification from './EmailVarification'
 
 const SignUpPopUp = ({ closepopup }) => {
     const [date , setDate] =useState(false)
@@ -15,33 +17,43 @@ const SignUpPopUp = ({ closepopup }) => {
     const [month , setMonth] =useState("")
     const [year , setYear] =useState("")
     const [gender,setGender]=useState("")
+    const [male , setMale]=useState("")
+    const [female , setFemale]=useState("")
+    const [other , setOther]=useState("")
     const [genderpopup , setGenderPopUp]=useState(false)
+    const [emailVarification , setEmailVarification] =useState(false)
+    const history = useHistory("")
     
     const birthDate =`${day}/${month}/${year}`
     console.log(birthDate)
     const signUpDetails={
-        name:fname,
-        surname:surname,
+        fname:fname,
+        lname:surname,
         email:email,
         password:password,
-        birthdate:birthDate,
-        gender:gender
+        day:day,
+        month:month,
+        year:year,
+        female:female,
+        male:male,
+        other:other,
     }
-    console.log(signUpDetails)
-    const handleSignUpSubmit = ()=>{
+    const handleSignUpSubmit = (e)=>{
+        e.preventDefault()
+        setEmailVarification(true)
         
-        fetch("http://localhost:5000/signup/signup", {
+        fetch("http://localhost:5000/signup", {
             method: "POST",
             body: JSON.stringify(signUpDetails),
             headers: { "Content-type": "application/json; charset=UTF-8" },
-      }).then((response) => response.json(signUpDetails) ,console.log(signUpDetails) ,);
+      }).then((response) => response.json(signUpDetails) ,console.log(signUpDetails) ,setTimeout(()=>{history.push('/emailVarification')},2000) );
       
     }
 
     
 
     return (
-        <div className="w-full z-50 SignUpPopUp fixed h-screen top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-80 flex justify-center items-center">
+        <div className="w-full z-50 SignUpPopUp fixed h-screen top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-bg-theme  flex justify-center items-center">
             <div className="w-1/4 relative bg-white shadow-2xl p-5 transform -translate-y-10">
                 <div className="signupForm space-y-3">
                     <div className="wrapper-title space-y-2 relative ">
@@ -50,7 +62,7 @@ const SignUpPopUp = ({ closepopup }) => {
                         <FontAwesomeIcon icon={faTimes} className="absolute top-0 right-0 mr-3 text-xl cursor-pointer " onClick={closepopup} />
                     </div>
                     <div className="formmain">
-                        <form action="http://localhost:5000/signup" method="POST">
+                        <form onSubmit={handleSignUpSubmit}>
                             <div className="space-y-5">
                                 <div className="flex w-full justify-between space-x-2">
                                     <input className="bg-gray-200 placeholder-gray-500 border w-full  rounded-sm outline-none p-1.5" type="text" name="fname" id="fname" placeholder="First Name" onChange={(e)=>{setFname(e.target.value)}}  required/>
@@ -245,22 +257,22 @@ const SignUpPopUp = ({ closepopup }) => {
                                     <div className="flex items-center justify-between space-x-3"> 
                                         <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
                                             <label htmlFor="Male" className="text-xs font-semibold">Female</label>
-                                            <input placeholder="male" value="female" type="radio" name="female" id="" aria-required="true" onChange={(e)=>{setGender(e.target.value)}}/>
+                                            <input placeholder="male" value="female" type="radio" name="female" id="" aria-required="true" onChange={(e)=>{setFemale(e.target.value)}}/>
                                         </div>
                                         <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
                                             <label htmlFor="Male" className="text-xs font-semibold">Male</label>
-                                            <input placeholder="male" value="male" type="radio" name="male" id=""  onChange={(e)=>{setGender(e.target.value)}}/>
+                                            <input placeholder="male" value="male" type="radio" name="male" id=""  onChange={(e)=>{setMale(e.target.value)}}/>
                                         </div>
                                         <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
                                             <label htmlFor="Male" className="text-xs font-semibold">Other</label>
-                                            <input placeholder="male" value="other" type="radio" name="other" id=""  onChange={(e)=>{setGender(e.target.value)}}/>
+                                            <input placeholder="male" value="other" type="radio" name="other" id=""  onChange={(e)=>{setOther(e.target.value)}}/>
                                         </div>
                                     </div>
                                     <div className="">
-                                        <p className="font-semibold tracking-tight text-xs">By clicking Sign Up, you agree to our <span className="text-btn-blue font-bold cursor-pointer">Terms</span> ,<span className="text-btn-blue font-bold cursor-pointer">Data Policy</span>  and <span className="text-btn-blue font-bold cursor-pointer">Cookie Policy</span> . You may receive SMS notifications from us and can opt out at any time.</p>
+                                        <p className="font-semibold tracking-tight text-xs">By clicking Next, you agree to our <span className="text-btn-blue font-bold cursor-pointer">Terms</span> ,<span className="text-btn-blue font-bold cursor-pointer">Data Policy</span>  and <span className="text-btn-blue font-bold cursor-pointer">Cookie Policy</span> . You may receive SMS notifications from us and can opt out at any time.</p>
                                     </div>
                                     <div className="flex justify-center w-full items-center">
-                                        <button className="bg-btn-green w-5/12 rounded-lg py-1.5 text-lg font-bold text-white" >Sign Up</button>
+                                        <button className="bg-btn-green w-5/12 rounded-lg py-1.5 text-lg font-bold text-white" onClick={handleSignUpSubmit} >Next</button>
                                     </div>
                                 </div>
                                 </div>

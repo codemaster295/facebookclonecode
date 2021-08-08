@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       colors :{
         'btn-blue':'#1877f2',
-        'btn-green':'#42b72a'
+        'btn-green':'#42b72a',
+        'bg-theme':'#e9ebee'
       }
     },
   },

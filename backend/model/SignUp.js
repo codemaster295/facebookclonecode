@@ -10,7 +10,11 @@ const signUpSchema = mongoose.Schema({
    year:String,
    female:String,
    male:String,
-   other:String
+   other:String,
+   token:{
+      type:Number,
+      require:true
+   }
 
 
 })
