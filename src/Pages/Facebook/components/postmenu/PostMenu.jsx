@@ -62,7 +62,7 @@ const PostMenu = (props ) => {
                         <h1 className="text-black font-semibold text-base tracking-widest">Move to Reacycle bin</h1>
                         <h1 className="text-gray-500 text-xs tracking-normal">Items in your Recycle bin are deleted after 30 days.</h1>
                     </span>
-                    {deletemenu?<DeletePost propsreload={props.reloadmenu} propspopup={menupopup} propsmenu={props.menuclose}  propsdelete={deletepost} id={props.id} />:""}
+                    {deletemenu?<DeletePost menuclose={props.menuclose} propsreload={props.reloadmenu} propspopup={menupopup} propsmenu={props.menuclose}  propsdelete={deletepost} id={props.id} />:""}
                  
                 </div>               
             </div>

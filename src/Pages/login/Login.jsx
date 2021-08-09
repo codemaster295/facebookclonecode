@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SignUpPopUp from "./SignUpPopUp";
 
@@ -13,12 +14,21 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUp , setSignUp] =useState(false)
-  let permission = "";
-  if (email === "meet@gmail.com" && password === "1234") {
-    permission = "/Facebook";
-  } else {
-    permission = "/";
-  }
+ const handleLogin =()=>{
+
+		
+		axios
+			.get(`http://localhost:5000/${email}`)
+			.then((d) => {
+				console.log(d)
+				console.log(d.data[0].password)
+			})
+			.catch((Err) => {
+				console.log(Err);
+			});
+		
+ }
+  
 
   const SubmitForm = (e) => {
     e.preventDefault();
@@ -61,12 +71,10 @@ const Login = () => {
                       setPassword(e.target.value);
                     }}
                   />
-                  <Link
-                    to={permission}
-                    className="w-full text-center block outline-none border border-gray-400 rounded-xl text-xl text-white bg-btn-blue"
-                  >
-                    <button className="p-5">Log In</button>
-                  </Link>
+                  
+                  
+                    <button className="p-5 w-full text-center block outline-none border border-gray-400 rounded-xl text-xl text-white bg-btn-blue" onClick={handleLogin}>Log In</button>
+                  
                   <div className="w-1/2 block mx-auto outline-none border border-gray-400 rounded-xl text-base text-white py-2.5 px-1 bg-btn-green">
                     <button className="w-full" type="submit" onClick={()=>{setSignUp(!signUp)}}>
                       Create New Account

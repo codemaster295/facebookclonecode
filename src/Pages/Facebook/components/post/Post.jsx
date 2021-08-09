@@ -26,6 +26,9 @@ const Post = (props) => {
   const menuclosed = () =>{
     setmenu(!menu)
   }
+  const menuClose = ()=>{
+    setMenuOpen(!menuOpen)
+  }
     // console.log(count);
     // console.log(pageLike);
   return (
@@ -53,7 +56,7 @@ const Post = (props) => {
               </div>
             </div>
           </div>
-          {menuOpen?<PostMenu reloadmenu={props.reload } menuclose={menuclosed} id={props.id} />:null}
+          {menuOpen?<PostMenu menuclose={menuClose} reloadmenu={props.reload } menuclose={menuclosed} id={props.id} />:null}
           <span onClick={()=>{setMenuOpen(!menuOpen)}}>
             < MoreHoriz className="cursor-pointer" />
           </span>

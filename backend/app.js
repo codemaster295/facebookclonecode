@@ -5,6 +5,7 @@ require('dotenv/config')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const Signup = require("./routes/SignUp")
+const Signupdetails = require('./model/SignUp')
 
 const userdetails = require('./model/UserDetail')
 const crypto =require('crypto')
@@ -21,10 +22,24 @@ const Post =require('./model/Post')
 app.use('/posts', postRoute)
 app.use('/signup', Signup)
 app.use('/', postRoute)
+app.get('/:email', async (req, res) => {
+    try {
+      const signup = await Signupdetails.find({email:req.params.email});
+      const decipher =crypto.createDecipher(algo,key)
+      const encrypted = signup[0].password
+      var decrypted = decipher.update(encrypted,'hex','utf8')
+      decrypted +=decipher.final('utf8')
+      console.log(decrypted)
+      
+      res.json({signup,decrypted})
+    } catch (err) {
+      res.json({ message: err })
+    }
+  });
 
 // Routes
 app.get('/', (req, res) => {
-    res.send('we are on home')
+   
 })
 
 app.post('/login' , (req,res)=>{

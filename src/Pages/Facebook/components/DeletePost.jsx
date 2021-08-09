@@ -13,8 +13,9 @@ const DeletePost = (props) => {
           result.json().then((resp)=>{
               props.propsreload()              
           })
-      })
-      props.propsmenu()
+        })
+        props.propsmenu()
+        // props.props.menuclose()
 
 }
     return (

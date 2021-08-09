@@ -4,6 +4,7 @@ import React from 'react'
 
 const ProfileMenu = () => {
     return (
+        
         <div className="fixed top-16 right-0 w-1/4 text-black bg-white p-5 shadow-2xl rounded-lg">
             <div className="flex items-center space-x-5 p-2 cursor-pointer hover:bg-bg-theme transition-all duration-100 ease-linear rounded-lg">
                 <FontAwesomeIcon icon={faUserCircle} className="text-gray-500" style={{fontSize:70}}/>          

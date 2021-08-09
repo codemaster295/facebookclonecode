@@ -16,6 +16,7 @@ const EmailVarification = () => {
 				const data = d.data
                 setEmail(data[(data.length)-1].email)
                 setTokendb(data[(data.length)-1].token)
+                console.log(data[(data.length)-1].token)
                
                
 			})

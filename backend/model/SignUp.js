@@ -1,9 +1,14 @@
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const signUpSchema = mongoose.Schema({
    fname:String,
    lname:String,
-   email:String,
+   email:{
+      type:String,
+      unique:true,
+      require:true
+   },
    password:String,
    day:String,
    month:String,
@@ -13,9 +18,11 @@ const signUpSchema = mongoose.Schema({
    other:String,
    token:{
       type:Number,
-      require:true
+      require:true,
+      
    }
 
 
 })
+signUpSchema.plugin(uniqueValidator)
 module.exports = mongoose.model('Signupdetails' ,signUpSchema)

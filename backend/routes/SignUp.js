@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
       res.json(signup)
     } catch (err) {
       res.json({ message: err })
+      console.log(err,"DFEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     }
   });
  
