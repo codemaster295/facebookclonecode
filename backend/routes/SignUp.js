@@ -51,26 +51,31 @@ router.get('/', async (req, res) => {
       var transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: 'gaminghawkeye14@gmail.com',
-            pass: 'Enter@meet19'
+            user: 'mmo.globaliasoft@gmail.com',
+            pass: '$#Thhso84Htdf'
           }
         });
         
         var mailOptions = {
-          from: 'gaminghawkeye14@gmail.com',
+          from: 'mmo.globaliasoft@gmail.com',
           to: req.body.email,
           subject: 'OTP for the varification of your Email Id in Facebook',
-          text: `hyy user Thanks for signing up in the facebook clone here is the OTP for your login`,
+          text: `hyy user Thanks for signing up in the facebook clone here is the OTP ${token} for your login`,
           // html: `<h1>hey ${fname}</h1><br/> `        
         };
-        
-        transporter.sendMail(mailOptions, function(error, info){
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('Email sent: ' + info.response);
-          }
-        });
+        if(token){
+
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+        }
+        else{
+          return
+        }
 
     // try {
   

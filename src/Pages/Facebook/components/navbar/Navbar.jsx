@@ -11,9 +11,11 @@ import {
   PeopleAlt,
 } from "@material-ui/icons";
 import { useState } from "react";
+import ProfileMenu from "../profilemenu/ProfileMenu";
 
 const Navbar = () => {
   const [friends , setFriends]=useState(false)
+  const [profilemenu , setProfileMenu]=useState(false)
   return (
     <header className="shadow-2xl  py-1.5 fixed top-0 left-0 w-full z-50 bg-white p-5">
       <div className="flex items-center w-full justify-between">
@@ -80,7 +82,9 @@ const Navbar = () => {
           <AccountCircle
             className="text-gray-300 cursor-pointer transform scale-100 hover:scale-105 transition-all duration-100 ease"
             style={{ fontSize: 45 }}
+            onClick={()=>{setProfileMenu(!profilemenu)}}
           />
+          {profilemenu?<ProfileMenu />:""}
         </div>
       </div>
     </header>
