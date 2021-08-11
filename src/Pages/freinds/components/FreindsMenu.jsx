@@ -10,10 +10,11 @@ const FreindsMenu = ({ clickProp }) => {
     useEffect(() => {
         axios
             .get(
-                "https://api.unsplash.com/photos/?client_id=SFVnJp_wl_0VdkPEul9E4_6-CC6n4r8nzZQn4jVoeLw"
+                "http://localhost:5000/signup"
             )
             .then((d) => {
                 setFbData(d.data);
+                console.log(d.data)
             })
             .catch((Err) => {
                 console.log(Err);
@@ -41,7 +42,7 @@ const FreindsMenu = ({ clickProp }) => {
             <div className="box p-5 space-y-5 overflow-y-scroll  scrollbar scrollbar-thumb-gray-300 scrollbar-track-gray-50 h-screen">
                 <h1 className="font-semibold text-black text-lg tracking-widest">Freind Request</h1>
                 <h1 className="text-btn-blue text-xs cursor-pointer" onClick={()=>{setRequest(true)}}>View sent requests</h1>
-                {fbData.length ?
+                {/* {fbData.length ?
                     <>
                         {fbData &&
                             fbData.map((props, i) => (
@@ -56,7 +57,7 @@ const FreindsMenu = ({ clickProp }) => {
                         {fbData &&
                             fbData.map((props, i) => (
                                 <FreindRequest username={fbData[i].user.name} userImg={fbData[i].user.profile_image.large} mutual={fbData[i].user.total_photos} />))}
-                    </> : <h1>No new requests</h1>}
+                    </> : <h1>No new requests</h1>} */}
             </div>
             {req?<SentRequest status={requestBox}/>:null}
         </div>

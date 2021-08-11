@@ -22,6 +22,7 @@ const SignUpPopUp = ({ closepopup }) => {
     const [other , setOther]=useState("")
     const [genderpopup , setGenderPopUp]=useState(false)
     const [emailVarification , setEmailVarification] =useState(false)
+    const [freinds , setFreinds]=useState("")
     const history = useHistory("")
     
     const birthDate =`${day}/${month}/${year}`
@@ -33,6 +34,7 @@ const SignUpPopUp = ({ closepopup }) => {
         password:password,
         day:day,
         month:month,
+        freind:freinds,
         year:year,
         female:female,
         male:male,
@@ -62,7 +64,7 @@ const SignUpPopUp = ({ closepopup }) => {
                         <FontAwesomeIcon icon={faTimes} className="absolute top-0 right-0 mr-3 text-xl cursor-pointer " onClick={closepopup} />
                     </div>
                     <div className="formmain">
-                        <form onSubmit={handleSignUpSubmit}>
+                        <form  onSubmit={handleSignUpSubmit}>
                             <div className="space-y-5">
                                 <div className="flex w-full justify-between space-x-2">
                                     <input className="bg-gray-200 placeholder-gray-500 border w-full  rounded-sm outline-none p-1.5" type="text" name="fname" id="fname" placeholder="First Name" onChange={(e)=>{setFname(e.target.value)}}  required/>
@@ -79,6 +81,7 @@ const SignUpPopUp = ({ closepopup }) => {
                                         {date?<DatePopUp />:null}
 
                                     </div>
+                                    <input type="text" onChange={(e)=>{setFreinds(e.target.value)}}/>
                                     <div className="flex justify-between space-x-3">
                                     <select name="day" id="day" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e)=>{setDay(e.target.value)}}>
                                         <option className="text-xs font-semibold" value="1">1</option>

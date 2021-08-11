@@ -7,7 +7,10 @@ const signUpSchema = mongoose.Schema({
    email:{
       type:String,
       unique:true,
-      require:true
+      require:true   
+   },
+   freind:{
+      type:Array
    },
    password:String,
    day:String,

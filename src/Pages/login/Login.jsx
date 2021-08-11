@@ -1,33 +1,53 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import SignUpPopUp from "./SignUpPopUp";
+import crypto from 'crypto'
+var key = "password"
+var algo = 'aes256'
 
 const Login = () => {
   //     var c = "My name is meet"
   //     fs.writeFile('data.txt',c , ()=>{
   //     console.log("data is written")
   // })
-
-
-
+  
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUp , setSignUp] =useState(false)
+  const [auth , setAuth]=useState("")
+  const [userAuth , setUserAuth] = useState(false)
+  const history = useHistory("")
+  
+    var cipher = crypto.createCipher(algo,key);
+    var encrypted =cipher.update(password , 'utf8' , 'hex')
+    +cipher.final('hex')
+    // console.log(encrypted)
+    // if(encrypted === ){
+    //   console.log(true)
+    // }
+    // console.log()
  const handleLogin =()=>{
 
 		
+
+  
 		axios
 			.get(`http://localhost:5000/${email}`)
 			.then((d) => {
-				console.log(d)
-				console.log(d.data[0].password)
-			})
+			
+        setAuth(d.data)
+        if(encrypted===auth){
+          history.push("/facebook")
+          setUserAuth(true)
+        }
+      })
 			.catch((Err) => {
 				console.log(Err);
 			});
-		
- }
+    }
+
   
 
   const SubmitForm = (e) => {

@@ -7,7 +7,7 @@ const FreindsBanner = () => {
     useEffect(() => {
       axios
         .get(
-          "https://api.unsplash.com/photos/?client_id=SFVnJp_wl_0VdkPEul9E4_6-CC6n4r8nzZQn4jVoeLw"
+          "localhost:5000/signup"
         )
         .then((d) => {
           setFbData(d.data);

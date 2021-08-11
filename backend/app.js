@@ -6,6 +6,8 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const Signup = require("./routes/SignUp")
 const Signupdetails = require('./model/SignUp')
+const cors =require('cors')
+app.use(cors())
 
 const userdetails = require('./model/UserDetail')
 const crypto =require('crypto')
@@ -25,13 +27,7 @@ app.use('/', postRoute)
 app.get('/:email', async (req, res) => {
     try {
       const signup = await Signupdetails.find({email:req.params.email});
-      const decipher =crypto.createDecipher(algo,key)
-      const encrypted = signup[0].password
-      var decrypted = decipher.update(encrypted,'hex','utf8')
-      decrypted +=decipher.final('utf8')
-      console.log(decrypted)
-      
-      res.json({signup,decrypted})
+    res.json(signup[0].password)
     } catch (err) {
       res.json({ message: err })
     }
@@ -55,6 +51,7 @@ app.post('/login' , (req,res)=>{
         password:encrypted,
         profileimage:req.body.profileimage,
         freinds:req.body.freinds,
+        // freinds:['EFSEFS',"fSEFESFESFSEFF"],
         post:req.body.post,
         birthdate:req.body.birthdate,
         gender:req.body.gender,
