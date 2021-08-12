@@ -7,12 +7,7 @@ var key = "password"
 var algo = 'aes256'
 
 const Login = () => {
-  //     var c = "My name is meet"
-  //     fs.writeFile('data.txt',c , ()=>{
-  //     console.log("data is written")
-  // })
-  
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signUp , setSignUp] =useState(false)
@@ -23,23 +18,25 @@ const Login = () => {
     var cipher = crypto.createCipher(algo,key);
     var encrypted =cipher.update(password , 'utf8' , 'hex')
     +cipher.final('hex')
-    // console.log(encrypted)
-    // if(encrypted === ){
-    //   console.log(true)
-    // }
-    // console.log()
+    
  const handleLogin =()=>{
-
+let id =""
 		
 
   
 		axios
-			.get(`http://localhost:5000/${email}`)
+			.get(`https://cd3ef1f4390d.ngrok.io/${email}`)
 			.then((d) => {
 			
-        setAuth(d.data)
+        setAuth(d.data.password)
         if(encrypted===auth){
-          history.push("/facebook")
+          history.push({
+          pathname:'/facebook',
+          state:{
+
+          id:d.data.email,
+          },
+          })
           setUserAuth(true)
         }
       })

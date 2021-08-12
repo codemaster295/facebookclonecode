@@ -9,9 +9,7 @@ const signUpSchema = mongoose.Schema({
       unique:true,
       require:true   
    },
-   freind:{
-      type:Array
-   },
+  posts:[],
    password:String,
    day:String,
    month:String,

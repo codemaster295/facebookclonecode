@@ -29,8 +29,6 @@ const Post = (props) => {
   const menuClose = ()=>{
     setMenuOpen(!menuOpen)
   }
-    // console.log(count);
-    // console.log(pageLike);
   return (
     <div className="w-10/12 mx-auto shadow-lg bg-white">
       <div className="space-x-5">

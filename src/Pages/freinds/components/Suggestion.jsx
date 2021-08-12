@@ -18,7 +18,6 @@ const Suggestion = ({clickProp}) => {
                 console.log(Err);
             });
     }, []);
-    console.log(fbData)
     const [req, setRequest] = useState(false)
     const requestBox = () =>{
         setRequest(!req)

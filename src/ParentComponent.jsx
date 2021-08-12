@@ -7,7 +7,6 @@ const ParentComponent = () => {
     
     const getData = (data)=>{
         setImportData(data)
-    console.log(importData.firstname,"parent")
 
     }
     

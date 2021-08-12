@@ -11,12 +11,11 @@ const EmailVarification = () => {
     useEffect(() => {
 		
 		axios
-			.get("http://localhost:5000/signup")
+			.get("https://cd3ef1f4390d.ngrok.io/signup")
 			.then((d) => {
 				const data = d.data
                 setEmail(data[(data.length)-1].email)
                 setTokendb(data[(data.length)-1].token)
-                console.log(data[(data.length)-1].token)
                
                
 			})

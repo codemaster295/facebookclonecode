@@ -5,13 +5,12 @@ import CreateStory from "../createcomponent/CreateStory";
 import Post from "../post/Post";
 import axios from "axios";
 
-const Feed = () => {
+const Feed = (props) => {
 	const [fbData, setFbData] = useState([]);
 	const [reload, setReload] = useState(true);
 	const [emoji , setEmoji]  =useState("")
   const [index , setIndex]=useState()
 	useEffect(() => {
-		console.log("useefffcet");
 		axios
 			.get("http://localhost:5000")
 			.then((d) => {

@@ -24,9 +24,9 @@ const SignUpPopUp = ({ closepopup }) => {
     const [emailVarification , setEmailVarification] =useState(false)
     const [freinds , setFreinds]=useState("")
     const history = useHistory("")
+
     
     const birthDate =`${day}/${month}/${year}`
-    console.log(birthDate)
     const signUpDetails={
         fname:fname,
         lname:surname,
@@ -44,7 +44,7 @@ const SignUpPopUp = ({ closepopup }) => {
         e.preventDefault()
         setEmailVarification(true)
         
-        fetch("http://localhost:5000/signup", {
+        fetch("https://cd3ef1f4390d.ngrok.io/signup", {
             method: "POST",
             body: JSON.stringify(signUpDetails),
             headers: { "Content-type": "application/json; charset=UTF-8" },

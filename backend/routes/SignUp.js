@@ -18,7 +18,6 @@ router.get('/', async (req, res) => {
       res.json(signup)
     } catch (err) {
       res.json({ message: err })
-      console.log(err,"DFEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
     }
   });
  
@@ -34,7 +33,7 @@ router.get('/', async (req, res) => {
       fname:req.body.fname,
       lname:req.body.lname,
       email:req.body.email,
-      freind:req.body.freinds,
+      posts:[{}],
       password:encrypted,
       day:req.body.day,
       month:req.body.month,
@@ -48,7 +47,6 @@ router.get('/', async (req, res) => {
     
     signup.save().then((res)=>{
       signup.freind.push(freinds)
-      console.log(res)
       })
       var transporter = nodemailer.createTransport({
           service: 'gmail',
@@ -71,7 +69,6 @@ router.get('/', async (req, res) => {
             if (error) {
               console.log(error);
             } else {
-              console.log('Email sent: ' + info.response);
             }
           });
         }
@@ -83,7 +80,6 @@ router.get('/', async (req, res) => {
   
     //   const signuppost = await signup.save();
     //   res.json(signuppost)
-    //   console.log(signuppost)
     // } catch (err) {
     //   res.json({ message: err })
     // }

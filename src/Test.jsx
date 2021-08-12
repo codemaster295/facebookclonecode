@@ -12,8 +12,6 @@ const Test = () => {
       )
       .then((d) => {
         setFbData(d.data.items[0]);
-        console.log(fbData , "fbdata")
-        console.log(fbData.length)
       })
       .catch((Err) => {
         console.log(Err);

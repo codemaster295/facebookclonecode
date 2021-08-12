@@ -33,7 +33,6 @@ const PostPopUp = ({ setModal , setReload }) => {
 	const [process ,setProcess] =useState("0")
 	const [loader ,setLoader] =useState(false)
 	const [previewImage , setPreviewImage] =useState("")
-	console.log(previewImage)
 	const userName = "MMO";
 	const userImageLink =
 	"https://firebasestorage.googleapis.com/v0/b/facebook-clone-8f5aa.appspot.com/o/userimage%2F610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png?alt=media&token=513a64f2-531a-450e-8013-6347a55a70dd";
@@ -46,12 +45,10 @@ const PostPopUp = ({ setModal , setReload }) => {
 				(snapshot.bytesTransferred/snapshot.totalBytes)*100
 				)
 				setProgress(progress)
-				console.log(progress)
 		},error =>{console.log(error)},()=>{
 			storage.ref("images").child(image.name).getDownloadURL().then(url =>{
 				const URL = url
 			
-				console.log(URL)
 				
 					const setDataPost = ({
 						title:URL,
@@ -60,12 +57,11 @@ const PostPopUp = ({ setModal , setReload }) => {
 						
 					})
 					setModal(!setModal);
-					console.log(setDataPost)
-						fetch("http://localhost:5000", {
-							method: "POST",
+						fetch(`https://cd3ef1f4390d.ngrok.io/eq2eq2eqe@gmail.com`, {
+							method: "PUT",
 							body: JSON.stringify(setDataPost),
 							headers: { "Content-type": "application/json; charset=UTF-8" },
-						}).then((response) => response.json(setDataPost) ,console.log("done"));	
+						}).then((response) => response.json(setDataPost));	
 						setReload()	 
 				
 				
@@ -81,7 +77,6 @@ const PostPopUp = ({ setModal , setReload }) => {
 		if (event.target.files[0]) {
 			setImage(event.target.files[0]);
 			var reader = new FileReader();
-			console.log(event.target.files[0])
 			
 		}
 	}

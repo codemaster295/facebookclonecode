@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import ProfileMenu from "../profilemenu/ProfileMenu";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [friends , setFriends]=useState(false)
   const [profilemenu , setProfileMenu]=useState(false)
   return (
@@ -84,7 +84,7 @@ const Navbar = () => {
             style={{ fontSize: 45 }}
             onClick={()=>{setProfileMenu(!profilemenu)}}
           />
-          {profilemenu?<ProfileMenu />:""}
+          {profilemenu?<ProfileMenu userid={props.userid} />:""}
         </div>
       </div>
     </header>
