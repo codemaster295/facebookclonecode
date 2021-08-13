@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator')
+// const uniqueValidator = require('mongoose-unique-validator')
 
 const signUpSchema = mongoose.Schema({
    fname:String,
@@ -9,7 +9,13 @@ const signUpSchema = mongoose.Schema({
       unique:true,
       require:true   
    },
-  posts:[],
+  posts:[
+     {
+      title:String,
+      description:String,
+      username:String
+     }
+  ],
    password:String,
    day:String,
    month:String,
@@ -25,5 +31,5 @@ const signUpSchema = mongoose.Schema({
 
 
 })
-signUpSchema.plugin(uniqueValidator)
+// signUpSchema.plugin(uniqueValidator)
 module.exports = mongoose.model('Signupdetails' ,signUpSchema)

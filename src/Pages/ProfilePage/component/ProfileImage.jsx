@@ -16,10 +16,10 @@ const ProfileImage = () => {
                     <div className="w-10/12 mx-auto rounded-xl overflow-hidden">
                         <img className="w-full" src="https://scontent.fstv3-1.fna.fbcdn.net/v/t39.30808-6/p180x540/234319577_114649654244205_6133896553808906073_n.jpg?_nc_cat=100&ccb=1-4&_nc_sid=e3f864&_nc_ohc=ZqKCMWmvQGIAX_SSqIR&_nc_ht=scontent.fstv3-1.fna&oh=09c6a538757fc17a8584dfb2b0c54371&oe=611A1CBA" alt="" />
                     </div>
-                    <div className="w-48 flex justify-center  h-48 bg-white shadow-2xl absolute items-center rounded-full overflow-hidden">
+                    <div className="w-48 flex p-px justify-center top-80  h-48 bg-white shadow-2xl absolute items-center rounded-full overflow-hidden">
 {/* <div className="p-2 h-full w-full rounded-full">
 </div> */}
-   <FontAwesomeIcon className="" style={{fontSize:"175px"}} icon={faUserCircle} />
+   <FontAwesomeIcon className="text-gray-500 p-1" style={{fontSize:"200px"}} icon={faUserCircle} />
                     </div>
                 </div>
             </div>

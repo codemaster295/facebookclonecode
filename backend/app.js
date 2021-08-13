@@ -37,27 +37,46 @@ app.get('/:email', async (req, res) => {
     res.json({ message: err })
   }
 });
-app.put('/:email',(req, res) => {
-  
-    const signup =Signupdetails.find({ email: req.params.email });
-    // signup.tree.freind.push(req.body)
-    console.log(req.body)
-    
-    const signupdata = new userdetails({
-      posts:req.body
-    })
-    signupdata.save()
-  
-});
 app.get('/:id', async (req, res) => {
   try {
-    const signup = await Signupdetails.find({id:req.params.id});
-    console.logO(req.params)
-    res.json(req.params)
+    const signup = await Signupdetails.find({_id:req.params.id});
+    res.json(signup[0])
   } catch (err) {
     res.json(err)
   }
 });
+// app.put('/:email',(req, res) => {
+  
+    // const signup =Signupdetails.find({ email: req.params.email });
+    // console.log( req.body)
+    // signup.tree.freind.push(req.body)
+    // console.log(req.body)
+    // signup.email.insert(res.json(req.body))
+    // res.json(req.body)
+//     Signupdetails.updateOne(()=>{
+
+//       $set: {
+//         posts: req.body
+//       }
+//     }, 
+//     )
+  
+// });
+//Update API
+app.put("/:email", function (req, res) {
+  Signupdetails.updateOne(
+    { email: req.params.email },
+    {
+      $pull: {
+        posts: req.body,
+        
+      },
+    }
+  ).then((result) => {
+    res.json(result);
+  });
+});
+
 
 // Routes
 app.get('/', (req, res) => {

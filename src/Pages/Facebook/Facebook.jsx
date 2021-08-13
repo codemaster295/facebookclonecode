@@ -13,12 +13,9 @@ const Facebook = () => {
   const [loggedUser,setLoggedUser] = useState("")
   const location = useLocation();
   useEffect(()=>{
-   
-      setLoggedUser(location.state.id)
 
-    
-
-  },[])
+    setLoggedUser(location.state.id)
+  })
   
   return (
     <div className="flex flex-col ">
