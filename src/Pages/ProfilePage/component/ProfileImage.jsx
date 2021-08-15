@@ -1,30 +1,35 @@
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCamera, faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import ProfileMenu from "../../Facebook/components/profilemenu/ProfileMenu";
+import Profilenav from "./Profilenav";
 
 const ProfileImage = () => {
-	return (
-		<>
-            {/* <div className="w-8/12 rounded-xl  relative overflow-hidden left-1/2 top-0 transform -translate-x-1/2 bg-white shadow-2xl h-96 z-0">
-                <img className="w-full h-full object-cover"src="https://live.staticflickr.com/2912/13981352255_fc59cfdba2_b.jpg" alt=""/>
-            <div className="w-48 h-48 overflow-hidden absolute shadow-2xl border-gray-500 bottom-0 bg-black rounded-full block left-1/2 transform -translate-x-1/2 z-50">
-                <img className="p-2 rounded-full" src="https://media.istockphoto.com/photos/sample-red-grunge-round-stamp-on-white-background-picture-id491520707?k=6&m=491520707&s=612x612&w=0&h=t-IFOkDIF3n-PA59Zq0CyYe_1FDpVZAiv1sm78DcN6s=" alt=""/>
-            </div>
-            </div> */}
-            <div className="container mx-auto">
-                <div className="flex justify-end flex-col items-center h-[50vh] ">
-                    <div className="w-10/12 mx-auto rounded-xl overflow-hidden">
-                        <img className="w-full" src="https://scontent.fstv3-1.fna.fbcdn.net/v/t39.30808-6/p180x540/234319577_114649654244205_6133896553808906073_n.jpg?_nc_cat=100&ccb=1-4&_nc_sid=e3f864&_nc_ohc=ZqKCMWmvQGIAX_SSqIR&_nc_ht=scontent.fstv3-1.fna&oh=09c6a538757fc17a8584dfb2b0c54371&oe=611A1CBA" alt="" />
-                    </div>
-                    <div className="w-48 flex p-px justify-center top-80  h-48 bg-white shadow-2xl absolute items-center rounded-full overflow-hidden">
-{/* <div className="p-2 h-full w-full rounded-full">
-</div> */}
-   <FontAwesomeIcon className="text-gray-500 p-1" style={{fontSize:"200px"}} icon={faUserCircle} />
+    return (
+        <div className="container bg-white profileimage mx-auto px-4 mt-20">
+            <div className="banner relative z-0 overflow-hidde border   shadow-2xl rounded-2xl">
+                <img className="h-[40vh] w-full object-cover rounded-2xl" src="https://www.akamai.com/uk/en/multimedia/images/promos/2020/free-trial-callout-image.jpg?imwidth=1366" alt="" />
+                <div className="absolute justify-end p-2    rounded-2xl flex items-end   left-0 transform top-0  bg-gradient-to-t bg-opacity-2 from-gray-100  to-transparent w-full h-full z-3">
+                    <button className="px-5 space-x-2 py-3 bg-white text-black font-bold tracking-tighter m-5 rounded-lg shadow-2xl">
+                        <FontAwesomeIcon icon={faCamera} />
+                        <span>Edit Cover Photo</span>
+                    </button>
+                </div>
+                <div className="w-48 h-48 rounded-full  bg-gradient-to-b bg-opacity-2 from-btn-blue  to-blue-200 p-3 absolute flex justify-end items-end  top-1/2 left-1/2 transform -translate-x-1/2 mt-5">
+                    <div className="relative w-full h-full flex  justify-center items-center">
+                        <span className="bg-gray-500 w-full h-full flex justify-center items-center rounded-full">
+
+                        <FontAwesomeIcon className="text-7xl text-white " icon={faUser} />
+                        </span>
+                        <span className="w-10 absolute right-0 bottom-0 h-10 flex justify-center items-center rounded-full bg-gray-300  ">
+                            <FontAwesomeIcon className="text-black text-2xl" icon={faCamera} />
+                        </span>
                     </div>
                 </div>
             </div>
-		</>
-	);
+            <Profilenav />
+        </div>
+    );
 };
 
 export default ProfileImage;

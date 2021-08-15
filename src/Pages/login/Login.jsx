@@ -25,10 +25,11 @@ let id =""
 
   
 		axios
-			.get(`https://cd3ef1f4390d.ngrok.io/${email}`)
+			.get(`http://92fbaf55be0a.ngrok.io/${email}`)
 			.then((d) => {
 			
         setAuth(d.data.password)
+        console.log(auth===encrypted)
         if(encrypted===auth){
           history.push({
           pathname:'/facebook',
