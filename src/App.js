@@ -8,20 +8,18 @@ import Profile from './Pages/ProfilePage/Profile';
 
 function App() {
 
-    return (  
+  return (
     <Router>
-        <Switch>
-          <Route exact path="/"><Login /></Route>
-          <Route path="/Facebook" component="Facebook"><Facebook />  </Route>
-          <Route path="/Freinds" component="Freinds"><Freinds />  </Route>
-          <Route path="/emailVarification" component="Login"><EmailVarification />  </Route>
-          <Route path="/profile" component="Profile"><Profile />  </Route>
-
-
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route path="/Facebook" component={Facebook} />
+        <Route path="/Freinds" component={Freinds} />
+        <Route path="/emailVarification" component={EmailVarification} />
+        <Route path="/profile" component={Profile} />
+      </Switch>
     </Router>
 
-    );
+  );
 }
 
 export default App;

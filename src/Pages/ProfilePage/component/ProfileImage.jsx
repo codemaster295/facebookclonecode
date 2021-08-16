@@ -112,7 +112,6 @@ const ProfileImage = (props) => {
 					</div>
 				) : null}
 			</div>
-			<Profilenav />
 		</div>
 	);
 };
