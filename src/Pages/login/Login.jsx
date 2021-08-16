@@ -25,7 +25,7 @@ let id =""
 
   
 		axios
-			.get(`http://92fbaf55be0a.ngrok.io/${email}`)
+			.get(`http://e25877ca2c15.ngrok.io/${email}`)
 			.then((d) => {
 			
         setAuth(d.data.password)

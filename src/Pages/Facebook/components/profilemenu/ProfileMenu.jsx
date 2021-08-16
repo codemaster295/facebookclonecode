@@ -10,7 +10,7 @@ const ProfileMenu = (props) => {
     const history = useHistory("")
     
 		axios
-			.get(`http://92fbaf55be0a.ngrok.io/${props.userid}`)
+			.get(`http://e25877ca2c15.ngrok.io/${props.userid}`)
 			.then((d) => {
 				setUserName(d.data.fname + d.data.lname);
 			})

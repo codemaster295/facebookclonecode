@@ -19,7 +19,7 @@ const CreatePost = ({reload}) => {
 
   return (
     <>
-      <div className="w-10/12 mx-auto  bg-white shadow-lg">
+      <div className="w-full mx-auto  bg-white shadow-lg">
         <div className="flex space-x-10 py-2 px-5 items-center justify-start ">
           <AccountCircle
             className="text-gray-300  transform scale-100 hover:scale-105 transition-all duration-100 ease-linear hover:bg-gray-100 border border-transparent rounded-full cursor-pointer"

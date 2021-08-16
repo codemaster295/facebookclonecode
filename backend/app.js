@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const app = express();
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8080
 require('dotenv/config')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
@@ -25,7 +25,7 @@ const postRoute = require('./routes/Posts')
 const Post = require('./model/Post');
 const { route } = require('./routes/SignUp');
 const UserDetail = require('./model/UserDetail');
-const { SettingsBackupRestore } = require('@material-ui/icons');
+
 app.use('/posts', postRoute)
 app.use('/signup', Signup)
 app.use('/', postRoute)
@@ -36,6 +36,19 @@ app.get('/:email', async (req, res) => {
   } catch (err) {
     res.json({ message: err })
   }
+});
+app.put("/:email", function (req, res) {
+
+  Signupdetails.updateOne(
+    { email: req.params.email },
+    {
+      $set: {
+        bio: req.body.body, 
+      },
+    }
+  ).then((result) => {
+    res.json(result);
+  });
 });
 app.get('/:id', async (req, res) => {
   try {
@@ -67,7 +80,7 @@ app.put("/:email", function (req, res) {
   Signupdetails.updateOne(
     { email: req.params.email },
     {
-      $pull: {
+      $push: {
         posts: req.body,
         
       },

@@ -44,7 +44,7 @@ const SignUpPopUp = ({ closepopup }) => {
         e.preventDefault()
         setEmailVarification(true)
         
-        fetch("http://92fbaf55be0a.ngrok.io/signup", {
+        fetch("http://e25877ca2c15.ngrok.io/signup", {
             method: "POST",
             body: JSON.stringify(signUpDetails),
             headers: { "Content-type": "application/json; charset=UTF-8" },

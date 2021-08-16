@@ -16,6 +16,7 @@ const signUpSchema = mongoose.Schema({
       username:String
      }
   ],
+  bio:String,
    password:String,
    day:String,
    month:String,

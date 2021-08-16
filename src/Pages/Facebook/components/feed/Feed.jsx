@@ -13,7 +13,7 @@ const Feed = (props) => {
 	const [index, setIndex] = useState();
 	useEffect(() => {
 		axios
-			.get("http://92fbaf55be0a.ngrok.io/meetmoradiya7@gmail.com")
+			.get("http://e25877ca2c15.ngrok.io/meetmoradiya7@gmail.com")
 			.then((d) => {
 				setFbData(d.data.posts);
 				console.log(d.data);
@@ -28,7 +28,7 @@ const Feed = (props) => {
 
 	return (
 		<div className="w-full space-y-20 absolute h-screen top-24  z-0 p-2">
-			<div className="w-8/12 mx-auto space-y-10">
+			<div className="w-7/12 mx-auto space-y-10 px-20">
 				<CreateStory />
 				<CreatePost reload={changeState} />
 				<CreateRoom />
