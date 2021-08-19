@@ -25,7 +25,7 @@ let id =""
 
   
 		axios
-			.get(`http://e25877ca2c15.ngrok.io/${email}`)
+			.get(`http://efb441dc777c.ngrok.io/${email}`)
 			.then((d) => {
 			
         setAuth(d.data.password)
@@ -39,6 +39,9 @@ let id =""
           },
           })
           setUserAuth(true)
+        }
+        else{
+          alert("error password wrong")
         }
       })
 			.catch((Err) => {
