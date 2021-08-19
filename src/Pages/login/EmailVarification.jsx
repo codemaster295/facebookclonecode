@@ -28,6 +28,7 @@ const EmailVarification = () => {
         const handleSignUp = ()=>{
            
             if(parseInt(tokenOTP)===tokendb){
+                localStorage.setItem("userdata" ,email)
                 history.push('/Facebook')
             }
         }

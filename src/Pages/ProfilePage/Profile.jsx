@@ -17,10 +17,7 @@ import SimpleTabs from './component/Profilenav';
 const Profile = () => {
     const [email ,setEmail] = useState("")
     const location = useLocation();
-    useEffect(()=>{
-        setEmail(location.state.state.id)
-
-    },[])
+   
     console.log(email)
 const [posts , setPosts]=useState(true)
 const [about , setAbout]=useState(false)
@@ -31,8 +28,7 @@ const [videos , setVideos]=useState(false)
 const [more ,setMore]=useState(false)
     return (
         <div className="profilemain container mx-auto">
-            <Navbar />
-            <ProfileImage email={email} />
+            <ProfileImage  />
            <SimpleTabs />
         </div>
     )

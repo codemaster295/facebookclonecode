@@ -5,9 +5,11 @@ import {
 	faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Backdrop, CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import Navbar from "../../Facebook/components/navbar/Navbar";
 import ProfileMenu from "../../Facebook/components/profilemenu/ProfileMenu";
 import Profilenav from "./Profilenav";
 
@@ -18,6 +20,8 @@ const ProfileImage = (props) => {
 	const [bioTextLength, setBioTextLength] = useState(0);
 	const [userData , setUserData] = useState("")
 	const usermain = localStorage.getItem("userdata")
+	const [open, setOpen] = useState(true);
+
 	console.log(usermain)
 	useEffect(()=>{
 		axios.get(`http://aa7bfdaa56fe.ngrok.io/${usermain}` )
@@ -36,7 +40,10 @@ const ProfileImage = (props) => {
 	
 
 	return (
-		<div className="container bg-white profileimage mx-auto rounded-2xl mt-20">
+		<div className="container mx-auto">
+            <Navbar />
+
+		{userData?<div className="container bg-white profileimage mx-auto rounded-2xl mt-20">
 			<div className="banner relative z-0 overflow-hidde border    rounded-2xl">
 				<img
 					className="h-[40vh] w-full object-cover rounded-2xl"
@@ -64,9 +71,9 @@ const ProfileImage = (props) => {
 				</div>
 			</div>
 			<div className="text-center mt-10">
-				<h1 className="text-center text-3xl font-bold tracking-wides">
+				{userData?<h1 className="text-center text-3xl font-bold tracking-wides">
 					{userData.fname+"   " +userData.lname}
-				</h1>
+				</h1>:""}
 				{userData.bio?<div>
 					<h1 className="text-black font-semibold text-xl">{userData.bio}</h1>
 				<h1 className="text-btn-blue tracking-tight font-semibold  cursor-pointer" onClick={()=>{setBioPopUp(true);}}>Edit bio</h1>
@@ -114,6 +121,12 @@ const ProfileImage = (props) => {
 					</div>
 				) : null}
 			</div>
+		</div>:<Backdrop
+						className="text-white  absolute bg-white z-50 p-20"
+						open={open}
+					>
+						<CircularProgress className="text-btn-blue " />
+					</Backdrop>}
 		</div>
 	);
 };

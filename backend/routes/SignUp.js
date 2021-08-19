@@ -41,7 +41,8 @@ router.post('/', encoder, (req, res) => {
     female: req.body.female,
     male: req.body.male,
     other: req.body.other,
-    token: token
+    token: token,
+    bio:""
 
   });
 
