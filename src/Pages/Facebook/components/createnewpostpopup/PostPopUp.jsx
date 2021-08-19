@@ -57,11 +57,11 @@ const PostPopUp = ({ setModal , setReload }) => {
 						
 					})
 					setModal(!setModal);
-						fetch(`https://cd3ef1f4390d.ngrok.io/meetmoradiya7@gmail.com`, {
-							method: "PUT",
-							body: JSON.stringify(setDataPost),
-							headers: { "Content-type": "application/json; charset=UTF-8" },
-						}).then((response) => response.json(setDataPost));	
+							fetch(`https://cd3ef1f4390d.ngrok.io/meetmoradiya7@gmail.com`, {
+								method: "PUT",
+								body: JSON.stringify(setDataPost),
+								headers: { "Content-type": "application/json; charset=UTF-8" },
+							}).then((response) => response.json(setDataPost));	
 						setReload()	 
 				
 				

@@ -10,6 +10,7 @@ const Signupdetails = require('./model/SignUp')
 const cors = require('cors')
 app.use(cors())
 const ngrok = require('ngrok');
+const signupdata = require("./model/UserData")
 
 const userdetails = require('./model/UserDetail')
 const crypto = require('crypto')
@@ -37,13 +38,43 @@ app.get('/:email', async (req, res) => {
     res.json({ message: err })
   }
 });
+app.post("/loginpage", async(req, res) => {
+// console.log(req.body)
+  const test = signupdata.find({email:req.body.email }).then((result)=>{
+    if(req.body.email ===result[0].email && req.body.password=== result[0].password){
+      res.send(true)
+      }
+      else{
+        res.send(false)
+      }
+  })
+  
+
+
+
+
+  
+  // console.log(test)
+  // , password:req.body.password
+ 
+})
+app.post("/signupuser" , (req,res)=>{
+  const mmo = new signupdata({
+    email: req.body.email,
+    password: req.body.password,
+  })
+  mmo.save().then((result) => {
+    console.warn(result , "this is the result");
+    res.send(result)
+  })
+})
 app.put("/:email", function (req, res) {
 
   Signupdetails.updateOne(
     { email: req.params.email },
     {
       $set: {
-        bio: req.body.body, 
+        bio: req.body.body,
       },
     }
   ).then((result) => {
@@ -52,20 +83,20 @@ app.put("/:email", function (req, res) {
 });
 app.get('/:id', async (req, res) => {
   try {
-    const signup = await Signupdetails.find({_id:req.params.id});
+    const signup = await Signupdetails.find({ _id: req.params.id });
     res.json(signup[0])
   } catch (err) {
     res.json(err)
   }
 });
 // app.put('/:email',(req, res) => {
-  
-    // const signup =Signupdetails.find({ email: req.params.email });
-    // console.log( req.body)
-    // signup.tree.freind.push(req.body)
-    // console.log(req.body)
-    // signup.email.insert(res.json(req.body))
-    // res.json(req.body)
+
+// const signup =Signupdetails.find({ email: req.params.email });
+// console.log( req.body)
+// signup.tree.freind.push(req.body)
+// console.log(req.body)
+// signup.email.insert(res.json(req.body))
+// res.json(req.body)
 //     Signupdetails.updateOne(()=>{
 
 //       $set: {
@@ -73,7 +104,7 @@ app.get('/:id', async (req, res) => {
 //       }
 //     }, 
 //     )
-  
+
 // });
 //Update API
 app.put("/:email", function (req, res) {
@@ -82,7 +113,7 @@ app.put("/:email", function (req, res) {
     {
       $push: {
         posts: req.body,
-        
+
       },
     }
   ).then((result) => {

@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 const DeletePost = (props) => {
     const deletePost = ()=>{
        
-        fetch(`http://efb441dc777c.ngrok.io//${props.id}`, {
+        fetch(`http://aa7bfdaa56fe.ngrok.io//${props.id}`, {
             method: "DELETE",
            
       }).then((result)=>{

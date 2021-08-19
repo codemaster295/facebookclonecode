@@ -12,10 +12,13 @@ import {
 } from "@material-ui/icons";
 import { useState } from "react";
 import ProfileMenu from "../profilemenu/ProfileMenu";
+import { Backdrop, CircularProgress } from "@material-ui/core";
 
 const Navbar = (props) => {
   const [friends , setFriends]=useState(false)
   const [profilemenu , setProfileMenu]=useState(false)
+  const [open, setOpen] =useState(false);
+  
   return (
     <header className="shadow-2xl  py-1.5 fixed top-0 left-0 w-full z-50 bg-white p-5">
       <div className="flex items-center w-full justify-between">
@@ -82,9 +85,11 @@ const Navbar = (props) => {
           <AccountCircle
             className="text-gray-300 cursor-pointer transform scale-100 hover:scale-105 transition-all duration-100 ease"
             style={{ fontSize: 45 }}
-            onClick={()=>{setProfileMenu(!profilemenu)}}
+    
+    onClick={()=>{setProfileMenu(!profilemenu) ;setOpen(!open); }}
           />
-          {profilemenu?<ProfileMenu userid={props.userid} />:""}
+          {profilemenu?<ProfileMenu userid={props.userid} />:
+          ""}
         </div>
       </div>
     </header>

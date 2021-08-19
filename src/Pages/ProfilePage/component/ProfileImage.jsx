@@ -17,14 +17,16 @@ const ProfileImage = (props) => {
 	const [bioText, setBioText] = useState("");
 	const [bioTextLength, setBioTextLength] = useState(0);
 	const [userData , setUserData] = useState("")
+	const usermain = localStorage.getItem("userdata")
+	console.log(usermain)
 	useEffect(()=>{
-		axios.get(`http://efb441dc777c.ngrok.io/123@gmail.com` )
+		axios.get(`http://aa7bfdaa56fe.ngrok.io/${usermain}` )
 		.then((d)=>{
 			setUserData(d.data)
 		})
 	},[bioPopUp])
 	const bioSubmit =  () =>{
-		axios.put(`http://efb441dc777c.ngrok.io/${props.email}` ,{body:bioText})
+		axios.put(`http://aa7bfdaa56fe.ngrok.io/${usermain}` ,{body:bioText})
 		.then((d)=>{
 			setBioPopUp(false)
 			setBioTextLength(0)

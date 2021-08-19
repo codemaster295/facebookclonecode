@@ -13,7 +13,7 @@ const Facebook = () => {
   const [loggedUser,setLoggedUser] = useState("")
   const location = useLocation();
   useEffect(()=>{
-    setLoggedUser(location.state.id)
+    setLoggedUser(localStorage.getItem("userdata"))
   },[])
   
   return (

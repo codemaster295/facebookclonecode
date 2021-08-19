@@ -11,7 +11,7 @@ const EmailVarification = () => {
     useEffect(() => {
 		
 		axios
-			.get("http://efb441dc777c.ngrok.io/signup")
+			.get("http://aa7bfdaa56fe.ngrok.io/signup")
 			.then((d) => {
 				const data = d.data
                 setEmail(data[(data.length)-1].email)
