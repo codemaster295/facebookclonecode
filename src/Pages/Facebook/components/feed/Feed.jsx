@@ -13,7 +13,7 @@ const Feed = (props) => {
 	const [index, setIndex] = useState();
 	useEffect(() => {
 		axios
-			.get("http://aa7bfdaa56fe.ngrok.io/meetmoradiya7@gmail.com")
+			.get("http://d98ead25e989.ngrok.io/meetmoradiya7@gmail.com")
 			.then((d) => {
 				setFbData(d.data.posts);
 				console.log(d.data);

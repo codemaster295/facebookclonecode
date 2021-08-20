@@ -16,7 +16,7 @@ const ProfileMenu = (props) => {
 	const history = useHistory("");
 
 	axios
-		.get(`http://aa7bfdaa56fe.ngrok.io/${props.userid}`)
+		.get(`http://d98ead25e989.ngrok.io/${props.userid}`)
 		.then((d) => {
 			setUserName(d.data.fname + d.data.lname);
 			setOpen(false);

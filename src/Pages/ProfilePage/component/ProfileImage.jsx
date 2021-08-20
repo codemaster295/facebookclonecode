@@ -24,13 +24,13 @@ const ProfileImage = (props) => {
 
 	console.log(usermain)
 	useEffect(()=>{
-		axios.get(`http://aa7bfdaa56fe.ngrok.io/${usermain}` )
+		axios.get(`http://d98ead25e989.ngrok.io/${usermain}` )
 		.then((d)=>{
 			setUserData(d.data)
 		})
 	},[bioPopUp])
 	const bioSubmit =  () =>{
-		axios.put(`http://aa7bfdaa56fe.ngrok.io/${usermain}` ,{body:bioText})
+		axios.put(`http://d98ead25e989.ngrok.io/${usermain}` ,{body:bioText})
 		.then((d)=>{
 			setBioPopUp(false)
 			setBioTextLength(0)
