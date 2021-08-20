@@ -40,11 +40,11 @@ const ProfileImage = (props) => {
 	
 
 	return (
-		<div className="container mx-auto">
+		<div className="bg-gradient-to-t from-white via-gray-500 to-black w-full">
             <Navbar />
 
-		{userData?<div className="container bg-white profileimage mx-auto rounded-2xl mt-20">
-			<div className="banner relative z-0 overflow-hidde border    rounded-2xl">
+		{userData?<div className="container profileimage mx-auto  mt-20">
+			<div className="banner relative z-0    rounded-2xl">
 				<img
 					className="h-[40vh] w-full object-cover rounded-2xl"
 					src="https://www.akamai.com/uk/en/multimedia/images/promos/2020/free-trial-callout-image.jpg?imwidth=1366"
@@ -121,12 +121,13 @@ const ProfileImage = (props) => {
 					</div>
 				) : null}
 			</div>
-		</div>:<Backdrop
-						className="text-white  absolute bg-white z-50 p-20"
-						open={open}
-					>
-						<CircularProgress className="text-btn-blue " />
-					</Backdrop>}
+		</div>:
+			<Backdrop
+				className="text-white  absolute bg-white z-50 p-20"
+				open={open}
+			>
+				<CircularProgress className="text-btn-blue " />
+			</Backdrop>}
 		</div>
 	);
 };

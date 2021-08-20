@@ -8,4 +8,8 @@ body{
 }
 .PrivateTabIndicator-root-1{
     background-color:#1877f2 !important ;
+
+}
+.MuiBox-root {
+    padding:0 !important;
 }

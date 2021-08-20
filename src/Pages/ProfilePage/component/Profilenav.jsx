@@ -56,9 +56,10 @@ export default function SimpleTabs() {
   };
 
   return (
-    <div className="bg-white">
-      <AppBar position="static bg-white">
-        <Tabs value={value} onChange={handleChange} className="bg-white" aria-label="simple tabs example">
+    <div className="container mx-auto">
+      <span className="w-11/12 mx-auto block h-px border-b-2 px-20 bg-gray-500"></span>
+      <AppBar position="static " className="bg-white shadow-none">
+        <Tabs value={value} onChange={handleChange} className="bg-white w-11/12 shadow-2xl mx-auto flex justify-center" aria-label="simple tabs example">
           <Tab className="bg-white text-black" label="Posts" {...a11yProps(0)} />
           <Tab className="bg-white text-black" label="About" {...a11yProps(1)} />
           <Tab className="bg-white text-black" label="Freinds" {...a11yProps(2)} />
@@ -69,7 +70,7 @@ export default function SimpleTabs() {
           {/* <Tab className="!bg-white" label="Item Three" {...a11yProps(7)} /> */}
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <TabPanel  value={value} index={0}>
        <Posts />
       </TabPanel>
       <TabPanel value={value} index={1}>

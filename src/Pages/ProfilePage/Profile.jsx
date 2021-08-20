@@ -27,7 +27,7 @@ const [storyArchives , setStoryArchives]=useState(false)
 const [videos , setVideos]=useState(false)
 const [more ,setMore]=useState(false)
     return (
-        <div className="profilemain container mx-auto">
+        <div className="profilemain ">
             <ProfileImage  />
            <SimpleTabs />
         </div>
