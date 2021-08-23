@@ -56,7 +56,7 @@ const SignUpPopUp = ({ closepopup }) => {
 
     return (
         <div className="w-full z-50 SignUpPopUp fixed h-screen top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-bg-theme  flex justify-center items-center">
-            <div className="w-1/4 relative bg-white shadow-2xl p-5 transform -translate-y-10">
+            <div className="lg:w-6/12 md:7/12 w-11/12 xl:w-1/4 relative bg-white shadow-2xl p-5 transform -translate-y-10">
                 <div className="signupForm space-y-3">
                     <div className="wrapper-title space-y-2 relative ">
                         <h1 className="text-3xl font-bold tracking-widest text-black ">Sign Up</h1>

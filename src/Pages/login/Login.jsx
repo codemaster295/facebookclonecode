@@ -89,7 +89,7 @@ const Login = () => {
 	return (
 		<div className="relative z-0">
 			<div className="container mx-auto px-4">
-				<div className="lg:w-8/12 w-full mx-auto">
+				<div className="xl:w-8/12 lg:w-10/12 md:w-11/12 w-full mx-auto">
 					<div className="flex lg:flex-row h-screen  flex-col lg:space-y-0 space-y-10  justify-center lg:justify-between items-center">
 						<div className="lg:w-1/2 w-full space-y-5">
 							<h1 className="text-btn-blue text-3xl md:text-5xl tracking-widest font-bold text-left">
