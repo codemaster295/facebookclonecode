@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Navbar from "../../Facebook/components/navbar/Navbar";
 import ProfileMenu from "../../Facebook/components/profilemenu/ProfileMenu";
+import ProfileImageSelector from "./ProfileImageSelector";
 import Profilenav from "./Profilenav";
 
 const ProfileImage = (props) => {
@@ -21,16 +22,18 @@ const ProfileImage = (props) => {
 	const [userData , setUserData] = useState("")
 	const usermain = localStorage.getItem("userdata")
 	const [open, setOpen] = useState(true);
+	const [setImageSelector ,imageSelector] =useState(false)
 
 	console.log(usermain)
 	useEffect(()=>{
-		axios.get(`http://d98ead25e989.ngrok.io/${usermain}` )
+		axios.get(`http://2d41-43-251-72-17.ngrok.io/${usermain}` )
 		.then((d)=>{
 			setUserData(d.data)
+			console.log(d.data)
 		})
 	},[bioPopUp])
 	const bioSubmit =  () =>{
-		axios.put(`http://d98ead25e989.ngrok.io/${usermain}` ,{body:bioText})
+		axios.put(`http://2d41-43-251-72-17.ngrok.io/${usermain}` ,{body:bioText})
 		.then((d)=>{
 			setBioPopUp(false)
 			setBioTextLength(0)
@@ -59,12 +62,14 @@ const ProfileImage = (props) => {
 				<div className="w-48 h-48 rounded-full  bg-gradient-to-b bg-opacity-2 from-btn-blue  to-blue-200 p-3 absolute flex justify-end items-end  top-1/2 left-1/2 transform -translate-x-1/2 mt-5">
 					<div className="relative w-full h-full flex  justify-center items-center">
 						<span className="bg-gray-500 w-full h-full flex justify-center items-center rounded-full">
-							<FontAwesomeIcon className="text-7xl text-white " icon={faUser} />
+							{/* <FontAwesomeIcon className="text-7xl text-white " icon={faUser} /> */}
+							<img src="https://www.rupadentalcare.com/wp-content/uploads/2019/06/user-image-.png" alt="" />
 						</span>
 						<span className="w-10 absolute right-0 bottom-0 h-10 flex justify-center items-center rounded-full bg-gray-300  ">
 							<FontAwesomeIcon
 								className="text-black text-2xl"
 								icon={faCamera}
+								onClick={()=>{setImageSelector(true)}}
 							/>
 						</span>
 					</div>
@@ -128,6 +133,7 @@ const ProfileImage = (props) => {
 			>
 				<CircularProgress className="text-btn-blue " />
 			</Backdrop>}
+			{imageSelector?<ProfileImageSelector />:""}
 		</div>
 	);
 };

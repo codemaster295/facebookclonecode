@@ -28,7 +28,7 @@ const Login = () => {
 	// let id =""
 
 	// 		axios
-	// 			.get(`http://d98ead25e989.ngrok.io/${email}`)
+	// 			.get(`http://2d41-43-251-72-17.ngrok.io/${email}`)
 	// 			.then((d) => {
 
 	//         setAuth(d.data.password)
@@ -57,7 +57,7 @@ const Login = () => {
 		const data = { email, password };
 
 		axios
-			.post("http://d98ead25e989.ngrok.io/loginpage", data)
+			.post("http://2d41-43-251-72-17.ngrok.io/loginpage", data)
 			.then((response) => {
 				// {response?history.push("/facebook"):null}
 				if (response.data) {
