@@ -44,7 +44,7 @@ const SignUpPopUp = ({ closepopup }) => {
         e.preventDefault()
         setEmailVarification(true)
         
-        fetch("http://a933-43-251-72-17.ngrok.io/signup", {
+        fetch("https://facebookrestapi.herokuapp.com/signup", {
             method: "POST",
             body: JSON.stringify(signUpDetails),
             headers: { "Content-type": "application/json; charset=UTF-8" },

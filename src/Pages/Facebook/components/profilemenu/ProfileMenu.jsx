@@ -16,7 +16,7 @@ const ProfileMenu = (props) => {
 	const history = useHistory("");
 
 	axios
-		.get(`http://a933-43-251-72-17.ngrok.io/${props.userid}`)
+		.get(`https://facebookrestapi.herokuapp.com/${props.userid}`)
 		.then((d) => {
 			setUserName(d.data.fname + d.data.lname);
 			setOpen(false);

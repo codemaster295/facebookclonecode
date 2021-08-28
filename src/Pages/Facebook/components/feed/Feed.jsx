@@ -13,7 +13,7 @@ const Feed = (props) => {
 	const [index, setIndex] = useState();
 	useEffect(() => {
 		axios
-			.get("http://a933-43-251-72-17.ngrok.io/meetmoradiya7@gmail.com")
+			.get("https://facebookrestapi.herokuapp.com/meetmoradiya7@gmail.com")
 			.then((d) => {
 				setFbData(d.data.posts);
 				console.log(d.data);
@@ -31,19 +31,7 @@ const Feed = (props) => {
 			<div className="w-7/12 mx-auto space-y-10 px-20">
 				<CreateStory />
 				<CreatePost reload={changeState} />
-				<CreateRoom />
-				{fbData &&
-					fbData.map((props, i) => (
-						<Post
-							reload={changeState}
-							id={fbData[i]._id}
-							status={fbData[i].description}
-							// like={fbData[i].like}
-							img={fbData[i].title}
-							// username={fbData[i].username}
-							// usrimg={fbData[i].userImage}
-						/>
-					))}
+				<CreateRoom />		
 			</div>
 		</div>
 	);

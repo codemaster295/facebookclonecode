@@ -28,7 +28,7 @@ const Login = () => {
 	// let id =""
 
 	// 		axios
-	// 			.get(`http://a933-43-251-72-17.ngrok.io/${email}`)
+	// 			.get(`https://facebookrestapi.herokuapp.com/${email}`)
 	// 			.then((d) => {
 
 	//         setAuth(d.data.password)
@@ -57,7 +57,7 @@ const Login = () => {
 		const data = { email, password };
 
 		axios
-			.post("http://a933-43-251-72-17.ngrok.io/loginpage", data)
+			.post("https://facebookrestapi.herokuapp.com/loginpage", data)
 			.then((response) => {
 				// {response?history.push("/facebook"):null}
 				if (response.data) {
