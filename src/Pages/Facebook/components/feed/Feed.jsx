@@ -31,7 +31,10 @@ const Feed = (props) => {
 			<div className="w-7/12 mx-auto space-y-10 px-20">
 				<CreateStory />
 				<CreatePost reload={changeState} />
-				<CreateRoom />		
+				<CreateRoom />
+				{fbData && fbData.map((data)=>(
+					<Post username={data.username} status={data.description} img={data.title}/>	
+				))	}
 			</div>
 		</div>
 	);
