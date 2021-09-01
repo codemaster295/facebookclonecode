@@ -22,7 +22,7 @@ const ProfileImage = (props) => {
 	const [userData , setUserData] = useState("")
 	const usermain = localStorage.getItem("userdata")
 	const [open, setOpen] = useState(true);
-	const [setImageSelector ,imageSelector] =useState(false)
+	const [imageSelector ,setImageSelector]=useState(false)
 
 	console.log(usermain)
 	useEffect(()=>{
@@ -32,12 +32,16 @@ const ProfileImage = (props) => {
 			console.log(d.data)
 		})
 	},[bioPopUp])
+	console.log(userData)
 	const bioSubmit =  () =>{
 		axios.put(`https://facebookrestapi.herokuapp.com/${usermain}` ,{body:bioText})
 		.then((d)=>{
 			setBioPopUp(false)
 			setBioTextLength(0)
 		})
+	}
+	const imagepopup = () =>{
+		setImageSelector(!imageSelector)
 	}
 	
 	
@@ -50,7 +54,7 @@ const ProfileImage = (props) => {
 			<div className="banner relative z-0    rounded-2xl">
 				<img
 					className="h-[40vh] w-full object-cover rounded-2xl"
-					src="https://www.akamai.com/uk/en/multimedia/images/promos/2020/free-trial-callout-image.jpg?imwidth=1366"
+					src="https://easybase.io/assets/images/posts_images/5-great-react-libraries-1.png"
 					alt=""
 				/>
 				<div className="absolute justify-end p-2    rounded-2xl flex items-end   left-0 transform top-0  bg-gradient-to-t bg-opacity-2 from-gray-100  to-transparent w-full h-full z-3">
@@ -61,15 +65,15 @@ const ProfileImage = (props) => {
 				</div>
 				<div className="w-48 h-48 rounded-full  bg-gradient-to-b bg-opacity-2 from-btn-blue  to-blue-200 p-3 absolute flex justify-end items-end  top-1/2 left-1/2 transform -translate-x-1/2 mt-5">
 					<div className="relative w-full h-full flex  justify-center items-center">
-						<span className="bg-gray-500 w-full h-full flex justify-center items-center rounded-full">
-							{/* <FontAwesomeIcon className="text-7xl text-white " icon={faUser} /> */}
-							<img src="https://www.rupadentalcare.com/wp-content/uploads/2019/06/user-image-.png" alt="" />
+						<span className="bg-gray-500 w-full h-full flex justify-center items-center overflow-hidden flex justify-center rounded-full">
+							{/* <FontAwesomeIcon className="text-7xl text-white " icon={faUser} /> */} 
+							<img className="object-cover" src="https://media-exp1.licdn.com/dms/image/C4E03AQGH7ELCMAx8nA/profile-displayphoto-shrink_200_200/0/1602818458840?e=1633564800&v=beta&t=I_e7bT_M8vAaUbf3kN-MRsy2mfVBniTjWc9WDCWa93E" alt="" />
 						</span>
 						<span className="w-10 absolute right-0 bottom-0 h-10 flex justify-center items-center rounded-full bg-gray-300  ">
 							<FontAwesomeIcon
 								className="text-black text-2xl"
 								icon={faCamera}
-								onClick={()=>{setImageSelector(true)}}
+								onClick={()=>{setImageSelector(!imageSelector)}}
 							/>
 						</span>
 					</div>
@@ -126,6 +130,7 @@ const ProfileImage = (props) => {
 					</div>
 				) : null}
 			</div>
+			{imageSelector?<ProfileImageSelector close={imagepopup}/>:"hello"}
 		</div>:
 			<Backdrop
 				className="text-white  absolute bg-white z-50 p-20"
@@ -133,7 +138,6 @@ const ProfileImage = (props) => {
 			>
 				<CircularProgress className="text-btn-blue " />
 			</Backdrop>}
-			{imageSelector?<ProfileImageSelector />:""}
 		</div>
 	);
 };
