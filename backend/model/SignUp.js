@@ -28,7 +28,9 @@ const signUpSchema = mongoose.Schema({
       type:Number,
       require:true,
       
-   }
+   },
+   profileimage:String,
+
 
 
 })
