@@ -56,10 +56,12 @@ const Login = () => {
     setOpen(!open);
 		const data = { email, password };
 
+
 		axios
 			.post("https://facebookrestapi.herokuapp.com/loginpage", data)
 			.then((response) => {
 				// {response?history.push("/facebook"):null}
+				console.log(response.data)
 				if (response.data) {
 					history.push({
 						pathname: "/facebook",
@@ -88,6 +90,7 @@ const Login = () => {
 	};
 	return (
 		<div className="relative z-0">
+			<img src="" alt="" />
 			<div className="container mx-auto px-4">
 				<div className="xl:w-8/12 lg:w-10/12 md:w-11/12 w-full mx-auto">
 					<div className="flex lg:flex-row h-screen  flex-col lg:space-y-0 space-y-10  justify-center lg:justify-between items-center">

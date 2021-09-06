@@ -42,7 +42,8 @@ router.post('/', encoder, (req, res) => {
     male: req.body.male,
     other: req.body.other,
     token: token,
-    bio:""
+    bio:"",
+    
 
   });
 

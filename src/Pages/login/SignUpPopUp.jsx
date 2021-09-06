@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 import DatePopUp from './DatePopUp'
 import GenderPopUp from './GenderPopUp'
 import EmailVarification from './EmailVarification'
+import { Fade, Grow } from '@material-ui/core'
 
 const SignUpPopUp = ({ closepopup }) => {
     const [date , setDate] =useState(false)
@@ -24,7 +25,7 @@ const SignUpPopUp = ({ closepopup }) => {
     const [emailVarification , setEmailVarification] =useState(false)
     const [freinds , setFreinds]=useState("")
     const history = useHistory("")
-
+const [checked ,setChecked]=useState(true)
     
     const birthDate =`${day}/${month}/${year}`
     const signUpDetails={
@@ -39,6 +40,7 @@ const SignUpPopUp = ({ closepopup }) => {
         female:female,
         male:male,
         other:other,
+        profileimage:""
     }
     const handleSignUpSubmit = (e)=>{
         e.preventDefault()
@@ -55,13 +57,14 @@ const SignUpPopUp = ({ closepopup }) => {
     
 
     return (
+        <Grow in={checked}>
         <div className="w-full z-50 SignUpPopUp fixed h-screen top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-bg-theme  flex justify-center items-center">
             <div className="lg:w-6/12 md:7/12 w-11/12 xl:w-1/4 relative bg-white shadow-2xl p-5 transform -translate-y-10">
                 <div className="signupForm space-y-3">
                     <div className="wrapper-title space-y-2 relative ">
                         <h1 className="text-3xl font-bold tracking-widest text-black ">Sign Up</h1>
                         <h1 className="text-gray-500  font-semibold tracking-tight text-sm">It's quick and easy</h1>
-                        <FontAwesomeIcon icon={faTimes} className="absolute top-0 right-0 mr-3 text-xl cursor-pointer " onClick={closepopup} />
+                        <FontAwesomeIcon icon={faTimes} className="absolute top-0 right-0 mr-3 text-xl cursor-pointer "  onClick={closepopup}  />
                     </div>
                     <div className="formmain">
                         <form  onSubmit={handleSignUpSubmit}>
@@ -287,6 +290,7 @@ const SignUpPopUp = ({ closepopup }) => {
             </div>
         
         </div>
+    </Grow>
     )
 }
 
