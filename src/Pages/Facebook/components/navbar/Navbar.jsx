@@ -57,7 +57,7 @@ const Navbar = (props) => {
                   />
               </div>
             </NavLink>
-            <NavLink activeClassName="text-btn-blue border-b-2 border-btn-blue" className="inline-block text-gray-500  w-1/3 p-px" exact="/" to="/" >            
+            <NavLink activeClassName="t" className="inline-block text-gray-500  w-1/3 p-px" exact="/facebook" to="/facebook" >            
               <div className="w-full text-gray-500 flex flex-col justify-center items-center ">
                 <PeopleAlt
                   style={{ fontSize: 30 }}

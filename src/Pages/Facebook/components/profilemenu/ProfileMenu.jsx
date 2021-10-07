@@ -14,10 +14,12 @@ const ProfileMenu = (props) => {
 
 
 	const history = useHistory("");
-
+console.log(props.userid)
+const email = localStorage.getItem("email")
 	axios
-		.get(`https://facebookrestapi.herokuapp.com/${props.userid}`)
+		.get(`http://localhost:8080/getdata/${email}`)
 		.then((d) => {
+			console.log(d.data)
 			setUserName(d.data.fname + d.data.lname);
 			setOpen(false);
 		})
@@ -28,7 +30,7 @@ const ProfileMenu = (props) => {
 	const profilepage = () => {
 		history.push("/profile", {
 			state: {
-				id: props.userid,
+				email,
 			},
 		});
 	};

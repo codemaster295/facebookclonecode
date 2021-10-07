@@ -13,6 +13,9 @@ import PostPopUp from "../../Facebook/components/createnewpostpopup/PostPopUp";
 
 const ProfileImageSelector = ({close}) => {
 	const [imageupload , setImageUpoad] = useState(false)
+	const setModel = ()=>{
+		setImageUpoad(!imageupload)
+	}
 	return (
 		<div className="ProfileImageSelector w-full h-full z-50 fixed top-0 left-0 flex justify-center items-center bg-white bg-opacity-90">
 			<div className="w-6/12 p-5 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-2xl">
@@ -28,7 +31,7 @@ const ProfileImageSelector = ({close}) => {
 						<FontAwesomeIcon icon={faPlus} />
 						<span className="text-black font-bold text-xs">Upload Photo</span>
 					</button>
-					{imageupload?<PostPopUp />:""}
+					{imageupload?<PostPopUp setModal={setModel}/>:""}
 					<button className="flex w-5/12 justify-center px-10 py-3     items-center space-x-3 bg-bg-theme  transition-all rounded-md duration-100 ease hover:bg-[rgba(0,0,0,0.06)]">
 						<FontAwesomeIcon icon={faCropAlt} />
 						<span className="text-black font-bold text-xs">Add Frame</span>

@@ -38,6 +38,10 @@ app.get('/:email', async (req, res) => {
     res.json({ message: err })
   }
 });
+app.get("/getdata/:email" ,async(req,res)=>{
+  const userData = await Signupdetails.findOne({email:req.params.email})
+  res.json(userData)
+})
 app.post("/loginpage", async(req, res) => {
 // console.log(req.body)
   const test = signupdata.find({email:req.body.email }).then((result)=>{
@@ -91,7 +95,7 @@ app.get("/posts/:email" , async(req,res)=>{
       // res.json(dataArr)
     // console.log(dataArr)
 })
-app.put("/:email", function (req, res) {
+app.put("/getdata/:email", function (req, res) {
 
   Signupdetails.updateOne(
     { email: req.params.email },
@@ -146,9 +150,7 @@ app.put("/:email", function (req, res) {
 
 
 // Routes
-app.get('/', (req, res) => {
 
-})
 
 app.post('/login', (req, res) => {
   var cipher = crypto.createCipher(algo, key);

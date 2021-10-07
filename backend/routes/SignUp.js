@@ -12,7 +12,7 @@ const bodyParser = require('body-parser')
 const encoder = bodyParser.urlencoded()
 const jwt = require('jsonwebtoken')
 const jwtKey = "jwt"
-router.get('/', async (req, res) => {
+router.get('/getallpostdata', async (req, res) => {
   try {
     const signup = await Signupdetails.find();
     res.json(signup)

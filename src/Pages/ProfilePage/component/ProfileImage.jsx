@@ -20,13 +20,13 @@ const ProfileImage = (props) => {
 	const [bioText, setBioText] = useState("");
 	const [bioTextLength, setBioTextLength] = useState(0);
 	const [userData , setUserData] = useState("")
-	const usermain = localStorage.getItem("userdata")
+	const usermain = localStorage.getItem("email")
 	const [open, setOpen] = useState(true);
 	const [imageSelector ,setImageSelector]=useState(false)
 
 	console.log(usermain)
 	useEffect(()=>{
-		axios.get(`https://facebookrestapi.herokuapp.com/${usermain}` )
+		axios.get(`http://localhost:8080/getdata/${usermain}` )
 		.then((d)=>{
 			setUserData(d.data)
 			console.log(d.data)
@@ -34,7 +34,7 @@ const ProfileImage = (props) => {
 	},[bioPopUp])
 	console.log(userData)
 	const bioSubmit =  () =>{
-		axios.put(`https://facebookrestapi.herokuapp.com/${usermain}` ,{body:bioText})
+		axios.put(`http://localhost:8080/getdata/${usermain}` ,{body:bioText})
 		.then((d)=>{
 			setBioPopUp(false)
 			setBioTextLength(0)
@@ -130,7 +130,7 @@ const ProfileImage = (props) => {
 					</div>
 				) : null}
 			</div>
-			{imageSelector?<ProfileImageSelector close={imagepopup}/>:"hello"}
+			{imageSelector?<ProfileImageSelector close={imagepopup}/>:""}
 		</div>:
 			<Backdrop
 				className="text-white  absolute bg-white z-50 p-20"
