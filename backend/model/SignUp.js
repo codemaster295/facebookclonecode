@@ -9,12 +9,8 @@ const signUpSchema = mongoose.Schema({
       unique:true,
       require:true   
    },
-  posts:[
-     {
-      title:String,
-      description:String,
-      username:String
-     }
+   posts: [
+      { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }
   ],
   bio:String,
    password:String,
@@ -24,11 +20,7 @@ const signUpSchema = mongoose.Schema({
    female:String,
    male:String,
    other:String,
-   token:{
-      type:Number,
-      require:true,
-      
-   },
+  
   
 
 

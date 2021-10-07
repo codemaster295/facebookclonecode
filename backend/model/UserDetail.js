@@ -5,7 +5,9 @@ const userData = mongoose.Schema({
     password: String,
     profileimage: String,
     freinds: Array,
-    post: Array,
+    post: [
+        { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }
+    ],
     birthdate: Date,
     gender: String,
     school: String,

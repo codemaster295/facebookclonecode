@@ -21,13 +21,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', encoder, (req, res) => {
+router.post('/', encoder, async (req, res) => {
   var cipher = crypto.createCipher(algo, key);
   var encrypted = cipher.update(req.body.password, 'utf8', 'hex')
     + cipher.final('hex')
 
-  var token = Math.floor((Math.random() * 10000) + 100)
-
+  // var token = Math.floor((Math.random() * 10000) + 100)
+var token = null
 
   const signup = new Signupdetails({
     fname: req.body.fname,
@@ -41,50 +41,45 @@ router.post('/', encoder, (req, res) => {
     female: req.body.female,
     male: req.body.male,
     other: req.body.other,
-    token: token,
-    bio:"",
-    
-
+    bio: "",
   });
 
-  signup.save().then((res) => {
-    signup.freind.push(freinds)
+  signup.save().then(async (reds) => {
+    token = await jwt.sign({ password: signup.password }, "abcd123")
+    console.log(token)
+    res.json({token:token , email:req.body.email})
   })
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'mmo.globaliasoft@gmail.com',
-      pass: '$#Thhso84Htdf'
-    }
-  });
+  // await res. send(token)
+  // var transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //     user: 'mmo.globaliasoft@gmail.com',
+  //     pass: '$#Thhso84Htdf'
+  //   }
+  // });
 
-  var mailOptions = {
-    from: 'mmo.globaliasoft@gmail.com',
-    to: req.body.email,
-    subject: 'OTP for the varification of your Email Id in Facebook',
-    text: `hyy user Thanks for signing up in the facebook clone here is the OTP ${token} for your login`,
-    // html: `<h1>hey ${fname}</h1><br/> `        
-  };
-  if (token) {
+  // var mailOptions = {
+  //   from: 'mmo.globaliasoft@gmail.com',
+  //   to: req.body.email,
+  //   subject: 'OTP for the varification of your Email Id in Facebook',
+  //   text: `hyy user Thanks for signing up in the facebook clone here is the OTP ${token} for your login`,
+  //   // html: `<h1>hey ${fname}</h1><br/> `        
+  // };
+  // if (token) {
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-      }
-    });
-  }
-  else {
-    return
-  }
-
-  // try {
-
-  //   const signuppost = await signup.save();
-  //   res.json(signuppost)
-  // } catch (err) {
-  //   res.json({ message: err })
+  //   transporter.sendMail(mailOptions, function (error, info) {
+  //     if (error) {
+  //       console.log(error);
+  //     } else {
+  //     }
+  //   });
+  // }
+  // else {
+  //   return
   // }
 
 
+
+
 })
+//......SignUP.......//

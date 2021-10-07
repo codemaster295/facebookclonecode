@@ -11,11 +11,13 @@ const Feed = (props) => {
 	const [reload, setReload] = useState(true);
 	const [emoji, setEmoji] = useState("");
 	const [index, setIndex] = useState();
+	
 	useEffect(() => {
+	const email = localStorage.getItem("email")
 		axios
-			.get("https://facebookrestapi.herokuapp.com/meetmoradiya7@gmail.com")
+			.get(`http://localhost:8080/posts/${email}`)
 			.then((d) => {
-				setFbData(d.data.posts);
+				setFbData(d.data);
 				console.log(d.data);
 			})
 			.catch((Err) => {
@@ -25,6 +27,7 @@ const Feed = (props) => {
 	const changeState = () => {
 		setReload(!reload);
 	};
+	console.log(fbData , "dawdhuiawdhawdbgh")
 
 	return (
 		<div className="w-full space-y-20 absolute h-screen top-24  z-0 p-2">
@@ -32,7 +35,7 @@ const Feed = (props) => {
 				<CreateStory />
 				<CreatePost reload={changeState} />
 				<CreateRoom />
-				{fbData && fbData.map((data)=>(
+				{fbData && fbData.filter(x=>x.title).map((data)=>(
 					<Post username={data.username} status={data.description} img={data.title}/>	
 				))	}
 			</div>

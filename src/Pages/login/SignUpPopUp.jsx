@@ -7,6 +7,7 @@ import DatePopUp from './DatePopUp'
 import GenderPopUp from './GenderPopUp'
 import EmailVarification from './EmailVarification'
 import { Fade, Grow } from '@material-ui/core'
+import axios from 'axios'
 
 const SignUpPopUp = ({ closepopup }) => {
     const [date , setDate] =useState(false)
@@ -46,12 +47,15 @@ const [checked ,setChecked]=useState(true)
         e.preventDefault()
         setEmailVarification(true)
         
-        fetch("https://facebookrestapi.herokuapp.com/signup", {
-            method: "POST",
-            body: JSON.stringify(signUpDetails),
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-      }).then((response) => response.json(signUpDetails) ,console.log(signUpDetails) ,setTimeout(()=>{history.push('/emailVarification')},2000) );
+    //     fetch("http://localhost:8080/signup", {
+    //         method: "POST",
+    //         body: JSON.stringify(signUpDetails),
+    //         headers: { "Content-type": "application/json; charset=UTF-8" },
+    //   }).then((x)=>{console.log(x.data)});
       
+      axios.post("http://localhost:8080/signup" ,  signUpDetails, {
+          headers: { "Content-type": "application/json; charset=UTF-8" }
+      }).then((res)=>{localStorage.setItem("token",res.data.token);localStorage.setItem("email",res.data.email);history.push("/facebook")})
     }
 
     

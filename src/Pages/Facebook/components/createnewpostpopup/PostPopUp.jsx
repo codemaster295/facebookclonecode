@@ -48,7 +48,7 @@ const PostPopUp = ({ setModal , setReload }) => {
 		},error =>{console.log(error)},()=>{
 			storage.ref("images").child(image.name).getDownloadURL().then(url =>{
 				const URL = url
-			
+			const email = localStorage.getItem("email")
 				
 					const setDataPost = ({
 						title:URL,
@@ -57,11 +57,15 @@ const PostPopUp = ({ setModal , setReload }) => {
 						
 					})
 					setModal(!setModal);
-							fetch(`https://cd3ef1f4390d.ngrok.io/meetmoradiya7@gmail.com`, {
-								method: "PUT",
-								body: JSON.stringify(setDataPost),
-								headers: { "Content-type": "application/json; charset=UTF-8" },
-							}).then((response) => response.json(setDataPost));	
+							// fetch(`https://cd3ef1f4390d.ngrok.io/createpost/${email}`, {
+							// 	method: "post",
+							// 	body: JSON.stringify(setDataPost),
+							// 	headers: { "Content-type": "application/json; charset=UTF-8" },
+							// }).then((response) => response.json(setDataPost));	
+
+							axios.post(`http://localhost:8080/createpost/${email}`,  setDataPost, {
+								headers: { "Content-type": "application/json; charset=UTF-8" }
+							}).then((res)=>{console.log(res)})
 						setReload()	 
 				
 				
