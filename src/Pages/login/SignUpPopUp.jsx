@@ -36,7 +36,6 @@ const [checked ,setChecked]=useState(true)
         password:password,
         day:day,
         month:month,
-        freind:freinds,
         year:year,
         female:female,
         male:male,
@@ -55,7 +54,15 @@ const [checked ,setChecked]=useState(true)
       
       axios.post("http://localhost:8080/signup" ,  signUpDetails, {
           headers: { "Content-type": "application/json; charset=UTF-8" }
-      }).then((res)=>{localStorage.setItem("token",res.data.token);localStorage.setItem("email",res.data.email);history.push("/facebook")})
+      }).then((res)=>{
+          if(res){
+
+              localStorage.setItem("token",res.data.token);localStorage.setItem("email",res.data.email);history.push("/facebook")
+            }
+            else{
+                return
+            }
+        })
     }
 
     
@@ -88,7 +95,6 @@ const [checked ,setChecked]=useState(true)
                                         {date?<DatePopUp />:null}
 
                                     </div>
-                                    <input type="text" onChange={(e)=>{setFreinds(e.target.value)}}/>
                                     <div className="flex justify-between space-x-3">
                                     <select name="day" id="day" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e)=>{setDay(e.target.value)}}>
                                         <option className="text-xs font-semibold" value="1">1</option>

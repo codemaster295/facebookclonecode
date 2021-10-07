@@ -26,6 +26,7 @@ const Feed = (props) => {
 	}, [reload]);
 	const changeState = () => {
 		setReload(!reload);
+		console.log("hit")
 	};
 	console.log(fbData , "dawdhuiawdhawdbgh")
 
@@ -33,7 +34,7 @@ const Feed = (props) => {
 		<div className="w-full space-y-20 absolute h-screen top-24  z-0 p-2">
 			<div className="w-7/12 mx-auto space-y-10 px-20">
 				<CreateStory />
-				<CreatePost reload={changeState} />
+				<CreatePost username={fbData[0]?.username} reload={changeState} />
 				<CreateRoom />
 				{fbData && fbData.filter(x=>x.title).map((data)=>(
 					<Post username={data.username} status={data.description} img={data.title}/>	

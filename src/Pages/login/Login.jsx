@@ -17,7 +17,7 @@ const Login = () => {
 	const [userAuth, setUserAuth] = useState(false);
 	const history = useHistory("");
 	const [error, setError] = useState("");
-  const [open, setOpen] =useState(false);
+	const [open, setOpen] = useState(false);
 
 
 	// var cipher = crypto.createCipher(algo,key);
@@ -51,36 +51,42 @@ const Login = () => {
 	// 				console.log(Err);
 	// 			});
 	//     }
+	const [login, setLogin] = useState(false)
 	const handleLogin = () => {
 		let id = "";
-    setOpen(!open);
+		setOpen(!open);
 		const data = { email, password };
 
 
 		axios
-			.post("https://facebookrestapi.herokuapp.com/loginpage", data)
+			.post("http://localhost:8080/loginpage", data)
 			.then((response) => {
 				// {response?history.push("/facebook"):null}
 				console.log(response.data)
 				if (response.data) {
+					setLogin(!login)
 					history.push({
 						pathname: "/facebook",
 						state: {
 							id: email,
 						},
 					});
-          localStorage.setItem("userdata" ,data.email)
-				} else if(response.data===false) {
+				} else if (response.data === false) {
 					setError("please check the credentials");
+				}
+				else{
+					setError("please check the credentials");
+
+
 				}
 			});
 	};
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    
-  };
+	const handleClose = () => {
+		setOpen(false);
+	};
+	const handleToggle = () => {
+
+	};
 
 	const SubmitForm = (e) => {
 		e.preventDefault();
@@ -130,15 +136,15 @@ const Login = () => {
 									>
 										Log In
 									</button> */}
-                  <div>
-      <button variant="outlined" className="p-5 w-full text-center block outline-none border border-gray-400 rounded-xl text-xl text-white bg-btn-blue" onClick={handleLogin}>
-        Login
-      </button>
-      <Backdrop className="text-white bg-white z-50" open={open} onClick={handleClose}>
-        <CircularProgress className="text-btn-blue " />
-      </Backdrop>
-    </div>
-                  {error?<h1 className="text-red-500 font-semibold tracking-widest text-center">{error}!</h1>:""}
+									<div>
+										<button variant="outlined" className="p-5 w-full text-center block outline-none border border-gray-400 rounded-xl text-xl text-white bg-btn-blue" onClick={handleLogin}>
+											Login
+										</button>
+										{login ? <Backdrop className="text-white bg-white z-50" open={open} onClick={handleClose}>
+											<CircularProgress className="text-btn-blue " />
+										</Backdrop> : ""}
+									</div>
+									{error ? <h1 className="text-red-500 font-semibold tracking-widest text-center">{error}!</h1> : ""}
 
 									<div className="w-1/2 block mx-auto outline-none border border-gray-400 rounded-xl text-base text-white py-2.5 px-1 bg-btn-green">
 										<button

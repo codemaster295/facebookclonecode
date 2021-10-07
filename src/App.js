@@ -14,7 +14,6 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route path="/Facebook" component={Facebook} />
         <Route path="/Freinds" component={Freinds} />
-        <Route path="/emailVarification" component={EmailVarification} />
         <Route path="/profile" component={Profile} />
       </Switch>
     </Router>

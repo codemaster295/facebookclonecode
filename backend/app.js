@@ -16,8 +16,10 @@ const userdetails = require('./model/UserDetail')
 const crypto = require('crypto')
 var key = "password"
 var algo = 'aes256'
+const jwt = require('jsonwebtoken')
 
 const db = mongoose
+
 // middelware
 
 // import routs
@@ -38,62 +40,75 @@ app.get('/:email', async (req, res) => {
     res.json({ message: err })
   }
 });
-app.get("/getdata/:email" ,async(req,res)=>{
-  const userData = await Signupdetails.findOne({email:req.params.email})
+app.get("/getdata/:email", async (req, res) => {
+  const userData = await Signupdetails.findOne({ email: req.params.email })
   res.json(userData)
 })
-app.post("/loginpage", async(req, res) => {
-// console.log(req.body)
-  const test = signupdata.find({email:req.body.email }).then((result)=>{
-    if(req.body.email ===result[0].email && req.body.password=== result[0].password){
-      res.send(true)
-      }
-      else{
-        res.send(false)
-      }
-  })
-  
-  
+app.post("/loginpage", async (req, res) => {
+  // console.log(req.body)
+  var cipher = crypto.createCipher(algo, key);
+  var encrypted = cipher.update(req.body.password, 'utf8', 'hex')
+    + cipher.final('hex')
+  console.log(req.body.email)
+  const test = await Signupdetails.findOne({ email: req.body.email })
+  console.log("hit", test)
+  if (test && test.password) {
+    if (encrypted === test.password) {
+      const token = await jwt.sign({ email: test.email }, "abc123");
+      res.send(token)
+    }
+    else {
+      res.status(400).send("invalid credentials")
+
+    }
+
+  }
+  else {
+    res.status(400).send("invalid credentials")
+
+  }
 
 
 
 
-  
+
+
+
   // console.log(test)
   // , password:req.body.password
- 
+
 })
-app.post("/signupuser" , (req,res)=>{
+app.post("/signupuser", (req, res) => {
   const mmo = new signupdata({
     email: req.body.email,
     password: req.body.password,
   })
   mmo.save().then((result) => {
-    console.warn(result , "this is the result");
+    console.warn(result, "this is the result");
     res.send(result)
   })
 })
-app.get("/posts/:email" , async(req,res)=>{
-  
-    const User = await Signupdetails.findOne({ email: req.params.email });
-    // console.log(User[0].posts)
-    
-    console.log(User.posts)
-    const postData = await Post.find().where('_id').in(User.posts).exec((err, records) => {
-      res.json(records)
-      console.log(records)
-    });
-    // console.log(User , "UserUserUserUserUser")
-    // for (let i = 0; i <= User[0].posts.length; i++) {
-    //     postdata =await Post.find({ _id: User[0].posts[i] })
-    //     // dataArr.push(postdata[i])
-    //     console.log(postdata[i] , "postdata[i]postdata[i]")
-        
-    //   }
-      // console.log(dataArr)
-      
-      // res.json(dataArr)
-    // console.log(dataArr)
+app.get("/posts/:email", async (req, res) => {
+
+  const User = await Signupdetails.findOne({ email: req.params.email });
+  // console.log(User[0].posts)
+
+  // console.log(User.posts)
+  const postData = await Post.find().where('_id').in(User.posts).exec((err, records) => {
+    res.json(records)
+    console.log(records)
+  });
+  // console.log(User , "UserUserUserUserUser")
+  // for (let i = 0; i <= User[0].posts.length; i++) {
+  //     postdata =await Post.find({ _id: User[0].posts[i] })
+  //     // dataArr.push(postdata[i])
+  //     console.log(postdata[i] , "postdata[i]postdata[i]")
+
+  //   }
+  // console.log(dataArr)
+
+  // res.json(dataArr)
+  // console.log(dataArr)
 })
 app.put("/getdata/:email", function (req, res) {
 
@@ -203,27 +218,27 @@ app.put('/:id', (req, res) => {
     }
   })
 })
-app.post("/createpost/:email" , async(req,res)=>{
+app.post("/createpost/:email", async (req, res) => {
 
   let User = null;
   const Post = new post({
     title: req.body.title,
     description: req.body.description,
     username: req.body.username,
-    like:req.body.like
+    like: req.body.like
 
   })
   await Post.save().then(async (data) => {
-      await Signupdetails.findOne({email: req.params.email }).then((xc) => {
-          console.log(xc)
-          User = xc
-      })
-      // console.log(User)
-      await User.posts.push(Post)
-      await User.save()
-      // console.log(User)
-      console.log("hit")
-      
+    await Signupdetails.findOne({ email: req.params.email }).then((xc) => {
+      console.log(xc)
+      User = xc
+    })
+    // console.log(User)
+    await User.posts.push(Post)
+    await User.save()
+    // console.log(User)
+    console.log("hit")
+
   })
 })
 
