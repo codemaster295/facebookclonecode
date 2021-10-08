@@ -5,6 +5,7 @@ import Facebook from './Pages/Facebook/Facebook';
 import Freinds from './Pages/freinds/Freinds';
 import EmailVarification from './Pages/login/EmailVarification';
 import Profile from './Pages/ProfilePage/Profile';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 

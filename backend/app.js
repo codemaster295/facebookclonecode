@@ -6,6 +6,7 @@ require('dotenv/config')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 const Signup = require("./routes/SignUp")
+const Login = require('./routes/Login')
 const Signupdetails = require('./model/SignUp')
 const cors = require('cors')
 app.use(cors())
@@ -21,16 +22,19 @@ const jwt = require('jsonwebtoken')
 const db = mongoose
 
 // middelware
-
+///
+// /api/v1/....
 // import routs
 
 const postRoute = require('./routes/Posts')
 const Post = require('./model/Post');
 const { route } = require('./routes/SignUp');
+const {router} = require('./routes/Login')
 const UserDetail = require('./model/UserDetail');
 
 app.use('/posts', postRoute)
-app.use('/signup', Signup)
+app.use('/api/v1/signup', Signup)
+app.use('/api/v1/login',Login)
 app.use('/', postRoute)
 app.get('/:email', async (req, res) => {
   try {
@@ -67,15 +71,6 @@ app.post("/loginpage", async (req, res) => {
     res.status(400).send("invalid credentials")
 
   }
-
-
-
-
-
-
-
-  // console.log(test)
-  // , password:req.body.password
 
 })
 app.post("/signupuser", (req, res) => {
@@ -130,7 +125,7 @@ app.get('/:id', async (req, res) => {
   } catch (err) {
     res.json(err)
   }
-});
+}); 
 // app.put('/:email',(req, res) => {
 
 // const signup =Signupdetails.find({ email: req.params.email });

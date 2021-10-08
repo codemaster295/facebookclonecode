@@ -12,22 +12,22 @@ const Feed = (props) => {
 	const [emoji, setEmoji] = useState("");
 	const [index, setIndex] = useState();
 	
+	const changeState = () => {
+		setReload(!reload);
+		console.log("hit")
+	};
 	useEffect(() => {
 	const email = localStorage.getItem("email")
 		axios
 			.get(`http://localhost:8080/posts/${email}`)
 			.then((d) => {
-				setFbData(d.data);
+				setFbData(d.data.reverse());
 				console.log(d.data);
 			})
 			.catch((Err) => {
 				console.log(Err);
 			});
 	}, [reload]);
-	const changeState = () => {
-		setReload(!reload);
-		console.log("hit")
-	};
 	console.log(fbData , "dawdhuiawdhawdbgh")
 
 	return (

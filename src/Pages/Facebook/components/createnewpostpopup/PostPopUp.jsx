@@ -60,12 +60,7 @@ const PostPopUp = ({ setModal, setReload ,username }) => {
 					username:username,
 
 				})
-				setModal(!setModal);
-				// fetch(`https://cd3ef1f4390d.ngrok.io/createpost/${email}`, {
-				// 	method: "post",
-				// 	body: JSON.stringify(setDataPost),
-				// 	headers: { "Content-type": "application/json; charset=UTF-8" },
-				// }).then((response) => response.json(setDataPost));	
+				setModal(!setModal);	
 				if (email) {
 
 					axios.post(`http://localhost:8080/createpost/${email}`, setDataPost, {

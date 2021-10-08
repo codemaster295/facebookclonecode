@@ -3,34 +3,28 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 
-const EmailVarification = () => {
+const EmailVarification = ({email}) => {
     const history = useHistory("")
-    const [email , setEmail] = useState("")
     const [tokenOTP , setTokenOTP]=useState("")
     const [tokendb , setTokendb]=useState("")
     useEffect(() => {
 		
-		axios
-			.get("https://facebookrestapi.herokuapp.com/signup")
-			.then((d) => {
-				const data = d.data
-                setEmail(data[(data.length)-1].email)
-                setTokendb(data[(data.length)-1].token)
-               
-               
-			})
-			.catch((Err) => {
-				
-			});
+	
+			
 			
 		},[]);
         
         const handleSignUp = ()=>{
-           
-            if(parseInt(tokenOTP)===tokendb){
-                localStorage.setItem("userdata" ,email)
-                history.push('/Facebook')
-            }
+           const data = {tokenOTP , email}
+            axios
+			.post("http://localhost:8080/api/v1/signup/verifyotp" , data)
+			.then((d) => {
+				console.log(d.data)
+                if(d.data){
+                    localStorage.setItem("email",email)
+                    history.push("/facebook")
+                }
+			})
         }
         
         

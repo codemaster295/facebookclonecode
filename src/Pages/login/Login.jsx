@@ -71,6 +71,7 @@ const Login = () => {
 							id: email,
 						},
 					});
+					localStorage.setItem("email" , email)
 				} else if (response.data === false) {
 					setError("please check the credentials");
 				}
