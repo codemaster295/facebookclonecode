@@ -22,8 +22,19 @@ const Facebook = () => {
       history.push("/")
     }
   }
+  const authUser = ()=>{
+    const token = localStorage.getItem("token")
+    if(token){
+     return
+      
+    }
+    else{
+      history.push("/")
+    }
+  }
   useEffect(() => {
-    loggeduser()
+    // loggeduser()
+    authUser()
   }, [])
   return (
     <div className="flex flex-col ">

@@ -18,6 +18,8 @@ const crypto = require('crypto')
 var key = "password"
 var algo = 'aes256'
 const jwt = require('jsonwebtoken')
+const PostRouter = require("./routes/Post")
+const userRouter =require('./routes/User')
 
 const db = mongoose
 
@@ -35,6 +37,8 @@ const UserDetail = require('./model/UserDetail');
 app.use('/posts', postRoute)
 app.use('/api/v1/signup', Signup)
 app.use('/api/v1/login',Login)
+app.use('/api/v1/post' , PostRouter)
+app.use('/api/v1/users' ,userRouter )
 app.use('/', postRoute)
 app.get('/:email', async (req, res) => {
   try {
@@ -48,63 +52,63 @@ app.get("/getdata/:email", async (req, res) => {
   const userData = await Signupdetails.findOne({ email: req.params.email })
   res.json(userData)
 })
-app.post("/loginpage", async (req, res) => {
-  // console.log(req.body)
-  var cipher = crypto.createCipher(algo, key);
-  var encrypted = cipher.update(req.body.password, 'utf8', 'hex')
-    + cipher.final('hex')
-  console.log(req.body.email)
-  const test = await Signupdetails.findOne({ email: req.body.email })
-  console.log("hit", test)
-  if (test && test.password) {
-    if (encrypted === test.password) {
-      const token = await jwt.sign({ email: test.email }, "abc123");
-      res.send(token)
-    }
-    else {
-      res.status(400).send("invalid credentials")
+// app.post("/loginpage", async (req, res) => {
+//   // console.log(req.body)
+//   var cipher = crypto.createCipher(algo, key);
+//   var encrypted = cipher.update(req.body.password, 'utf8', 'hex')
+//     + cipher.final('hex')
+//   console.log(req.body.email)
+//   const test = await Signupdetails.findOne({ email: req.body.email })
+//   console.log("hit", test)
+//   if (test && test.password) {
+//     if (encrypted === test.password) {
+//       const token = await jwt.sign({ email: test.email }, "abc123");
+//       res.send(token)
+//     }
+//     else {
+//       res.status(400).send("invalid credentials")
 
-    }
+//     }
 
-  }
-  else {
-    res.status(400).send("invalid credentials")
+//   }
+//   else {
+//     res.status(400).send("invalid credentials")
 
-  }
+//   }
 
-})
-app.post("/signupuser", (req, res) => {
-  const mmo = new signupdata({
-    email: req.body.email,
-    password: req.body.password,
-  })
-  mmo.save().then((result) => {
-    console.warn(result, "this is the result");
-    res.send(result)
-  })
-})
-app.get("/posts/:email", async (req, res) => {
+// })
+// app.post("/signupuser", (req, res) => {
+//   const mmo = new signupdata({
+//     email: req.body.email,
+//     password: req.body.password,
+//   })
+//   mmo.save().then((result) => {
+//     console.warn(result, "this is the result");
+//     res.send(result)
+//   })
+// })
+// app.get("/posts/:email", async (req, res) => {
 
-  const User = await Signupdetails.findOne({ email: req.params.email });
-  // console.log(User[0].posts)
+//   const User = await Signupdetails.findOne({ email: req.params.email });
+//   // console.log(User[0].posts)
 
-  // console.log(User.posts)
-  const postData = await Post.find().where('_id').in(User.posts).exec((err, records) => {
-    res.json(records)
-    console.log(records)
-  });
-  // console.log(User , "UserUserUserUserUser")
-  // for (let i = 0; i <= User[0].posts.length; i++) {
-  //     postdata =await Post.find({ _id: User[0].posts[i] })
-  //     // dataArr.push(postdata[i])
-  //     console.log(postdata[i] , "postdata[i]postdata[i]")
+//   // console.log(User.posts)
+//   const postData = await Post.find().where('_id').in(User.posts).exec((err, records) => {
+//     res.json(records)
+//     console.log(records)
+//   });
+//   // console.log(User , "UserUserUserUserUser")
+//   // for (let i = 0; i <= User[0].posts.length; i++) {
+//   //     postdata =await Post.find({ _id: User[0].posts[i] })
+//   //     // dataArr.push(postdata[i])
+//   //     console.log(postdata[i] , "postdata[i]postdata[i]")
 
-  //   }
-  // console.log(dataArr)
+//   //   }
+//   // console.log(dataArr)
 
-  // res.json(dataArr)
-  // console.log(dataArr)
-})
+//   // res.json(dataArr)
+//   // console.log(dataArr)
+// })
 app.put("/getdata/:email", function (req, res) {
 
   Signupdetails.updateOne(
@@ -162,57 +166,57 @@ app.put("/:email", function (req, res) {
 // Routes
 
 
-app.post('/login', (req, res) => {
-  var cipher = crypto.createCipher(algo, key);
-  var encrypted = cipher.update(req.body.password, 'utf8', 'hex')
-    + cipher.final('hex')
+// app.post('/login', (req, res) => {
+//   var cipher = crypto.createCipher(algo, key);
+//   var encrypted = cipher.update(req.body.password, 'utf8', 'hex')
+//     + cipher.final('hex')
 
 
-  const userdata = new userdetails({
+//   const userdata = new userdetails({
 
-    username: req.body.username,
-    email: req.body.email,
-    password: encrypted,
-    profileimage: req.body.profileimage,
-    freinds: [],
-    // freinds:['EFSEFS',"fSEFESFESFSEFF"],
-    post: req.body.post,
-    birthdate: req.body.birthdate,
-    gender: req.body.gender,
-    school: req.body.school,
-    location: req.body.location,
-    hobbies: req.body.hobbies,
-    bio: req.body.bio,
-  })
-  userdata.save().then((result) => {
-    console.warn(result);
-  })
+//     username: req.body.username,
+//     email: req.body.email,
+//     password: encrypted,
+//     profileimage: req.body.profileimage,
+//     freinds: [],
+//     // freinds:['EFSEFS',"fSEFESFESFSEFF"],
+//     post: req.body.post,
+//     birthdate: req.body.birthdate,
+//     gender: req.body.gender,
+//     school: req.body.school,
+//     location: req.body.location,
+//     hobbies: req.body.hobbies,
+//     bio: req.body.bio,
+//   })
+//   userdata.save().then((result) => {
+//     console.warn(result);
+//   })
 
 
 
-  res.end("hello")
+//   res.end("hello")
 
-})
+// })
 
 
 app.get('/posts', (req, res) => {
   res.send('we are on posts')
 })
 
-app.delete('/:id', function (req, res) {
-  Post.deleteOne({ _id: req.params.id }).then((result) => {
-    res.json(result);
-  }).catch(err => {
-    console.warn(err);
-  });
-})
-app.put('/:id', (req, res) => {
-  Post.updateOne({ _id: req.body.id }, {
-    $set: {
-      title: req.body.title
-    }
-  })
-})
+// app.delete('/:id', function (req, res) {
+//   Post.deleteOne({ _id: req.params.id }).then((result) => {
+//     res.json(result);
+//   }).catch(err => {
+//     console.warn(err);
+//   });
+// })
+// app.put('/:id', (req, res) => {
+//   Post.updateOne({ _id: req.body.id }, {
+//     $set: {
+//       title: req.body.title
+//     }
+//   })
+// })
 app.post("/createpost/:email", async (req, res) => {
 
   let User = null;

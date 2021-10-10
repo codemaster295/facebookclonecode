@@ -59,7 +59,7 @@ const Login = () => {
 
 
 		axios
-			.post("http://localhost:8080/loginpage", data)
+			.post("http://localhost:8080/api/v1/login", data)
 			.then((response) => {
 				// {response?history.push("/facebook"):null}
 				console.log(response.data)
@@ -71,6 +71,7 @@ const Login = () => {
 							id: email,
 						},
 					});
+					localStorage.setItem("token" , response.data.token)
 					localStorage.setItem("email" , email)
 				} else if (response.data === false) {
 					setError("please check the credentials");

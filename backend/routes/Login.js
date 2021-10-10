@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
       const { email, password } = req.body;
       console.log(req.body);
   
-      const UserData = await loginData.findOne({ email });
+      const UserData = await loginData.findOne({ email:email });
       console.log(UserData);
       if (UserData && (await bcrypt.compare(password, UserData.password))) {
         // Create token

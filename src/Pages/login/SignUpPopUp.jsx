@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 import DatePopUp from './DatePopUp'
 import GenderPopUp from './GenderPopUp'
 import EmailVarification from './EmailVarification'
-import { Fade, Grow } from '@material-ui/core'
+import { Fade, FormControl, FormControlLabel, FormLabel, Grow, Radio, RadioGroup } from '@material-ui/core'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -30,8 +30,8 @@ const SignUpPopUp = ({ closepopup }) => {
 
 
     const signUpDetails = {
-        fname: fname,
-        lname: surname,
+        firstname: fname,
+        lastname: surname,
         email: email,
         password: password,
         birthdate: new Date(`${day}/${month}/${year}`),
@@ -44,6 +44,10 @@ const SignUpPopUp = ({ closepopup }) => {
 
         return now - dob > 180000;
     }
+    const handleChange = (event) => {
+        setGender(event.target.value);
+    };
+
 
 
 
@@ -52,7 +56,7 @@ const SignUpPopUp = ({ closepopup }) => {
         e.preventDefault()
         const age = await isOverEighteen(year, month, day)
         console.log(age)
-        if (age) {
+        if (age && signUpDetails !== "") {
             axios.post("http://localhost:8080/api/v1/signup", signUpDetails, {
                 headers: { "Content-type": "application/json; charset=UTF-8" }
             }).then((res) => {
@@ -105,7 +109,7 @@ const SignUpPopUp = ({ closepopup }) => {
                                         </div>
                                         {error ? <span>{error}</span> : null}
                                         <div className="flex justify-between space-x-3">
-                                            <select name="day" id="day" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e) => { setDay(e.target.value) }}>
+                                            <select required defaultValue="1" name="day" id="day" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e) => { setDay(e.target.value) }}>
                                                 <option className="text-xs font-semibold" value="1">1</option>
                                                 <option className="text-xs font-semibold" value="2">2</option>
                                                 <option className="text-xs font-semibold" value="3">3</option>
@@ -138,7 +142,7 @@ const SignUpPopUp = ({ closepopup }) => {
                                                 <option className="text-xs font-semibold" value="30">30</option>
                                                 <option className="text-xs font-semibold" value="31">31</option>
                                             </select>
-                                            <select name="month" id="month" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e) => { setMonth(e.target.value) }} >
+                                            <select required defaultValue="1" name="month" id="month" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e) => { setMonth(e.target.value) }} >
                                                 <option className="text-xs font-semibold" value="1">jan</option>
                                                 <option className="text-xs font-semibold" value="2">feb</option>
                                                 <option className="text-xs font-semibold" value="3">mar</option>
@@ -152,7 +156,7 @@ const SignUpPopUp = ({ closepopup }) => {
                                                 <option className="text-xs font-semibold" value="11">nov</option>
                                                 <option className="text-xs font-semibold" value="12">dec</option>
                                             </select>
-                                            <select name="year" id="year" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e) => { setYear(e.target.value) }}>
+                                            <select required name="year" defaultValue="2020" id="year" className="h-8 w-1/3 text-sm font-semibold tracking-widest border border-black rounded-sm bg-gray-50" onChange={(e) => { setYear(e.target.value) }}>
                                                 <option className="text-xs font-semibold" value="2021" selected="1">2021</option>
                                                 <option className="text-xs font-semibold" value="2020">2020</option>
                                                 <option className="text-xs font-semibold" value="2019">2019</option>
@@ -279,25 +283,29 @@ const SignUpPopUp = ({ closepopup }) => {
                                                 {genderpopup ? <GenderPopUp /> : null}
 
                                             </div>
+
                                             <div className="flex items-center justify-between space-x-3">
-                                                <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
-                                                    <label htmlFor="Male" className="text-xs font-semibold">Female</label>
-                                                    <input placeholder="male" value="female" type="radio" name="female" id="" aria-required="true" onChange={(e) => { setGender(e.target.value) }} />
-                                                </div>
-                                                <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
-                                                    <label htmlFor="Male" className="text-xs font-semibold">Male</label>
-                                                    <input placeholder="male" value="male" type="radio" name="male" id="" onChange={(e) => { setGender(e.target.value) }} />
-                                                </div>
-                                                <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
-                                                    <label htmlFor="Male" className="text-xs font-semibold">Other</label>
-                                                    <input placeholder="male" value="other" type="radio" name="other" id="" onChange={(e) => { setGender(e.target.value) }} />
-                                                </div>
+                                                <FormControl component="fieldset" className="w-full" required>
+                                                    <RadioGroup aria-required="true" aria-label="gender" name="gender1" value={gender} onChange={handleChange}>
+                                                        <div className="flex items-center justify-between space-x-3">
+                                                            <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
+                                                                <FormControlLabel labelPlacement="start" className="justify-between w-10/12 mx-auto" value="female" control={<Radio className="text-btn-blue" />} label="Female" />
+                                                            </div>
+                                                            <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
+                                                                <FormControlLabel labelPlacement="start" className="justify-between w-10/12 mx-auto" value="male" control={<Radio className="text-btn-blue" />} label="Male" />
+                                                            </div>
+                                                            <div className="flex items-center space-x-3 border-gray-500 border h-8 w-1/3 justify-around">
+                                                                <FormControlLabel labelPlacement="start" className="justify-between w-10/12 mx-auto" value="other" control={<Radio className="text-btn-blue" />} label="Other" />
+                                                            </div>
+                                                        </div>
+                                                    </RadioGroup>
+                                                </FormControl>
                                             </div>
                                             <div className="">
                                                 <p className="font-semibold tracking-tight text-xs">By clicking Next, you agree to our <span className="text-btn-blue font-bold cursor-pointer">Terms</span> ,<span className="text-btn-blue font-bold cursor-pointer">Data Policy</span>  and <span className="text-btn-blue font-bold cursor-pointer">Cookie Policy</span> . You may receive SMS notifications from us and can opt out at any time.</p>
                                             </div>
                                             <div className="flex justify-center w-full items-center">
-                                                <button className="bg-btn-green w-5/12 rounded-lg py-1.5 text-lg font-bold text-white" onClick={handleSignUpSubmit} >Next</button>
+                                                <button className="bg-btn-green w-5/12 rounded-lg py-1.5 text-lg font-bold text-white" >Next</button>
                                             </div>
                                         </div>
                                     </div>

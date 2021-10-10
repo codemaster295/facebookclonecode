@@ -11,6 +11,7 @@ const encoder = bodyParser.urlencoded();
 const jwt = require("jsonwebtoken");
 const OtpModel = require('../model/Otp')
 const jwtKey = "jwt";
+const user = require('../model/UserData')
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
@@ -36,13 +37,13 @@ router.get("/facebookuser", async (req, res) => {
 router.post("/", async (req, res) => {
   var otp = Math.floor((Math.random() * 10000) + 100)
   const isUserRegisters = await Signupdetails.findOne({ email: req.body.email })
-  // if (isUserRegisters) {
-  //   res.status(400).send("Email is already registerd")
-  // }
-  // else if (!req.body.email) {
-  //   res.status(400).send("please provide email")
-  // }
-  // else if (!isUserRegisters) {
+  if (isUserRegisters) {
+    res.status(400).send("Email is already registerd")
+  }
+  else if (!req.body.email) {
+    res.status(400).send("please provide email")
+  }
+  else if (!isUserRegisters) {
 
     const signup = new Signupdetails({
       firstname: req.body.firstname,
@@ -59,6 +60,18 @@ router.post("/", async (req, res) => {
     console.log(token, "token");
     signup.save().then((result) => {
       console.log(result);
+      const userdatamain =  new user({
+        _id:signup._id,
+        email: req.body.email,
+        username: `${req.body.firstname} ${req.body.lastname}`,
+        prifileimage: "",
+        bio: "",
+        birthdate: req.body.birthdate,
+        gender:  req.body.gender,
+      })
+      userdatamain.save().then((x)=>{
+        console.log(x)
+      }) 
       res.status(200).send("true")
       // res.json({ result, token });
     });
@@ -82,8 +95,39 @@ router.post("/", async (req, res) => {
         res.render('otp');
     });
     });
-  // }
+  }
 });
+router.post("/resendOtp" , async(req,res)=>{
+  var otp = Math.floor((Math.random() * 10000) + 100)
+
+const varifyUser = await Signupdetails.findOne({email:req.body.email})
+if(varifyUser){
+  const deleteOtp = await OtpModel.findOneAndDelete({_id:varifyUser._id})
+  let OTP = await new OtpModel({
+    _id: varifyUser._id,
+    otp: otp,
+  }).save().then(() => {
+    var mailOptions={
+      to: req.body.email,
+     subject: "OTP for the facebook registration",
+     html: "<h3>OTP for account verification is </h3>"  + "<h1 style='font-weight:bold;'>" + otp +"</h1>" // html body
+  }
+   
+   transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return res.status(400).send(error);
+      }
+      res.status(200).send("true")
+
+      res.render('otp');
+  });
+})
+}
+else{
+  res.status(400).send("user does not exist")
+}
+
+})
 router.post("/verifyotp" , async(req,res)=>{
   let dataUser = await Signupdetails.findOne({email:req.body.email})
   console.log(req.body)
@@ -93,7 +137,7 @@ router.post("/verifyotp" , async(req,res)=>{
     let otpNumber = await OtpModel.findOneAndRemove({_id:dataUser._id})
   }
   else{
-    res.status(400).send("invalid otp")
+    res.status(200).send("false")
   }
 })
 
