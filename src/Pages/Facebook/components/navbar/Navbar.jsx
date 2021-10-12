@@ -13,25 +13,16 @@ import {
 import { useState } from "react";
 import ProfileMenu from "../profilemenu/ProfileMenu";
 import { Backdrop, CircularProgress } from "@material-ui/core";
-import axios from 'axios'
-import TextField from "@material-ui/core/TextField";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import SearchBox from "../Searchbox/SearchBox";
 const Navbar = (props) => {
   const [friends, setFriends] = useState(false)
   const [profilemenu, setProfileMenu] = useState(false)
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState([])
-  let token = ""
-  const handleGetUser = () => {
-
-    axios.get("http://localhost:8080/api/v1/users/getalluser", { headers: { 'x-access-token': token } }).then(res => { setUser(res.data) })
+  const [searchBoxParam, setSearchBoxParam] = useState(false)
+  const handleClose =() =>{
+    setSearchBoxParam(!searchBoxParam)
   }
-  useEffect(() => {
-    token = localStorage.getItem("token")
-    handleGetUser()
-  }, [])
-  // console.log(user[0].username)
-
   return (
     <header className="shadow-2xl  py-1.5 fixed top-0 left-0 w-full z-50 bg-white p-5">
       <div className="flex items-center w-full justify-between">
@@ -42,42 +33,17 @@ const Navbar = (props) => {
               style={{ fontSize: 50 }}
             />
           </NavLink>
-          <Autocomplete
-            id="userSearch"
-            style={{ width: 300 }}
-            options={user}
-            // classes={{
-            //   option: classes.option
-            // }}
-            autoHighlight
-            getOptionLabel={(option) => option?.username}
-            renderOption={(option) => (
-              <React.Fragment>
-
-                {option?.username}
-              </React.Fragment>
-            )}
-            renderInput={(params) => (
-        <TextField
-          {...params}
-          
-          variant="outlined"
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: "new-password" // disable autocomplete and autofill
-          }}
-        />
-        )}
-    />
           <div className="seach-bar ml-6">
-            <div className="searchIcon relative">
+            {!searchBoxParam?<div className="searchIcon relative">
               <input
                 type="search"
                 className="bg-gray-200 rounded-full w-full outline-none px-10 py-2.5"
                 placeholder="Search Facebook"
+                onClick={()=>{setSearchBoxParam(!searchBoxParam)}}
               />
               <SearchIcon className="absolute cursor-pointer transform scale-100 hover:scale-105 transition-all duration-100 ease left-3 top-1/2  -translate-y-1/2 text-gray-500  " />
-            </div>
+            </div>:""}
+            {searchBoxParam?<SearchBox handleClose={handleClose}/>:""}
           </div>
         </div>
         <div className="center w-1/4 flex justify-between items-center">
